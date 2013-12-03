@@ -39,12 +39,12 @@ public class DoctorRecommendDataset {
 	 */
 	private Map<Integer, DiseaseEntity> allDisease = new HashMap<Integer, DiseaseEntity>();
 
-	/*
+	/**
 	 *通过疾病的id得到所有疾病的诊次
 	 * 
 	 */
 	private Map<Integer, List<RatingEntity>> ratingsByDiseaseId = new HashMap<Integer, List<RatingEntity>>();
-/*
+/**
  * 获取某个用户对某个疾病的诊断次数
  */
 	private Map<Integer,Integer> ratingByDiseaseIdDocId = new HashMap<Integer,Integer>();
@@ -52,7 +52,7 @@ public class DoctorRecommendDataset {
 	 * 通过医生的id得到所有疾病的诊次
 	 */
 	Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
-	/*
+	/**
 	 * 某个医生说治疗的疾病的集合
 	 */
 	private Map<Integer, List<Integer>> diseaseByDoctorId = new HashMap<Integer, List<Integer>>();
@@ -64,7 +64,7 @@ public class DoctorRecommendDataset {
 		loadRatings(REDOCDISPATH);
 	}
 	
-	/*
+	/**
 	 * 读doctor数据集，得出有多少个医生
 	 */
 	public void readDoctorTxtFile(String filePath) {
@@ -118,7 +118,7 @@ public class DoctorRecommendDataset {
 	
 	
 	
-	/*
+	/**
 	 * 读disease数据集，获取有多少种病
 	 */
 	public void readDiseaseTxtFile(String filePath) {
@@ -167,7 +167,7 @@ public class DoctorRecommendDataset {
 	}
 
 
-	/*
+	/**
 	 * 读取所有的rating
 	 */
 	public void loadRatings(String filePath) {
@@ -214,7 +214,7 @@ public class DoctorRecommendDataset {
 
 	}
 
-	/*
+	/**
 	 * 将诊次添加到map集合中
 	 */
 	public void addRatingToMap(Map<Integer, List<RatingEntity>> map,Integer key, RatingEntity rating) {
