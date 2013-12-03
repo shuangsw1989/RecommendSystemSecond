@@ -356,8 +356,8 @@ public class Recommend {
 
 		BaseDao bd = new BaseDaoImpl();
 		DataSet ds = bd.loadDataSet();
-		int[][] doctorSimilarity = getAllDoctorSimilartiy(ds.getAllDisease(),ds.getAllDoctor(),ds.getDiseaseByDoctorId());
-		printAllDoctorSimilartiy(ds.getAllDoctor(),doctorSimilarity);
+//		int[][] doctorSimilarity = getAllDoctorSimilartiy(ds.getAllDisease(),ds.getAllDoctor(),ds.getDiseaseByDoctorId());
+//		printAllDoctorSimilartiy(ds.getAllDoctor(),doctorSimilarity);
 		// readDoctorTxtFile(DOCTORPATH);
 		// readDiseaseTxtFile(DISEASEPATH);
 		// readTxtFile(PATH);

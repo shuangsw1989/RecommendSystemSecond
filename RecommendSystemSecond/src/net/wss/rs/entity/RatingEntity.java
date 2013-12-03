@@ -2,20 +2,30 @@ package net.wss.rs.entity;
 
 public class RatingEntity {
 
-	private int userId;
-	private int itemId;
+	private int doctorId;
+	private int diseaseId;
 	private int rating;
-	public int getUserId() {
-		return userId;
+	
+	public RatingEntity() {
+		super();
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public RatingEntity(int doctorId, int diseaseId, int rating) {
+		super();
+		this.doctorId = doctorId;
+		this.diseaseId = diseaseId;
+		this.rating = rating;
 	}
-	public int getItemId() {
-		return itemId;
+	public int getDoctorId() {
+		return doctorId;
 	}
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
+	}
+	public int getDiseaseId() {
+		return diseaseId;
+	}
+	public void setDiseaseId(int diseaseId) {
+		this.diseaseId = diseaseId;
 	}
 	public int getRating() {
 		return rating;
@@ -23,14 +33,6 @@ public class RatingEntity {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public RatingEntity(int userId, int itemId, int rating) {
-		super();
-		this.userId = userId;
-		this.itemId = itemId;
-		this.rating = rating;
-	}
-	public RatingEntity() {
-		super();
-	} 
+	
 	
 }

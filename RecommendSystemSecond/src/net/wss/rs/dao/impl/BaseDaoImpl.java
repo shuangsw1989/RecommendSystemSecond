@@ -24,8 +24,8 @@ public class BaseDaoImpl implements BaseDao{
 //	@Override
 	public DataSet loadDataSet() {
 		DataSet ds = new DataSet();
-		ds.setAllDisease(readDiseaseTxtFile(DISEASEPATH));
-		ds.setAllDoctor(readDoctorTxtFile(DOCTORPATH));
+//		ds.setAllDisease(readDiseaseTxtFile(DISEASEPATH));
+//		ds.setAllDoctor(readDoctorTxtFile(DOCTORPATH));
 		ds.setDiseaseByDoctorId(getDiseaseByDoctorId(PATH));
 		return ds;
 

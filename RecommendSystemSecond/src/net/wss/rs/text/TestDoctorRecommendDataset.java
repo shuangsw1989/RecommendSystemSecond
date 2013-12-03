@@ -11,6 +11,7 @@ public class TestDoctorRecommendDataset {
 		ds.printAllDoctor();
 		ds.printAllDisease();
 		ds.printAllRating();
+		ds.printAllRatingMatrix();
 		
 		
 	}

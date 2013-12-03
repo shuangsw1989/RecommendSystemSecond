@@ -35,7 +35,6 @@ public class Data {
 		ds.setAllDisease(readDiseaseTxtFile(DISEASEPATH));
 		ds.setAllDoctor(readDoctorTxtFile(DOCTORPATH));
 		ds.setDiseaseByDoctorId(getDiseaseByDoctorId(REDOCDISPATH));
-		ds.set
 		return ds;
 
 	}
@@ -354,8 +353,8 @@ public class Data {
 			}
 			/* build maps that provide access to ratings by userId or itemId */
 			for (RatingEntity rating : allRating) {
-				addRatingToMap(ds.getRatingsByDiseaseId(), rating.getItemId(), rating);
-				addRatingToMap(ds.getRatingsByDoctorId(), rating.getUserId(), rating);
+				addRatingToMap(ds.getRatingsByDiseaseId(), rating.getDiseaseId(), rating);
+				addRatingToMap(ds.getRatingsByDoctorId(), rating.getDoctorId(), rating);
 			}
 	}
 	/**

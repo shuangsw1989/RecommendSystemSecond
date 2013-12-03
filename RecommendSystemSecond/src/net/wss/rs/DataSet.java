@@ -155,18 +155,6 @@ public class DataSet {
 			System.out.println(value.getId());
 		}
 	}
-	/**
-	 * 打印所有诊次key-value，key,value是疾病的id
-	 */
-	public void printAllRating() {
-
-		for (Entry<Integer, RatingEntity> entry: allRating.entrySet()) {
-			Integer key = entry.getKey();
-			DiseaseEntity  value = entry.getValue();
-			
-			System.out.println(value.getId());
-		}
-	}
 
 	/**
 	 * 打印出所有的医生及其所治疗的疾病（矩阵的形式显示） 

@@ -52,10 +52,7 @@ public class DoctorRecommendDataset {
 	 * 通过医生的id得到所有疾病的诊次
 	 */
 	Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
-	/**
-	 * 某个医生说治疗的疾病的集合
-	 */
-	private Map<Integer, List<Integer>> diseaseByDoctorId = new HashMap<Integer, List<Integer>>();
+	
 
 	
 	public DoctorRecommendDataset(){
@@ -208,8 +205,8 @@ public class DoctorRecommendDataset {
 		
 		/* build maps that provide access to ratings by userId or itemId */
 		for (RatingEntity rating : allRating) {
-			addRatingToMap(ratingsByDiseaseId, rating.getItemId(), rating);
-			addRatingToMap(ratingsByDoctorId, rating.getUserId(), rating);
+			addRatingToMap(ratingsByDiseaseId, rating.getDiseaseId(), rating);
+			addRatingToMap(ratingsByDoctorId, rating.getDoctorId(), rating);
 		}
 
 	}
@@ -225,10 +222,6 @@ public class DoctorRecommendDataset {
 		}
 		ratingsForKey.add(rating);
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -263,12 +256,6 @@ public class DoctorRecommendDataset {
 	 */
 	public void printAllRating() {
 
-//		for (Entry<Integer, RatingEntity> entry: allRating.entrySet()) {
-//			Integer key = entry.getKey();
-//			DiseaseEntity  value = entry.getValue();
-//			
-//			System.out.println(value.getId());
-//		}
 		for (Entry<Integer, DoctorEntity> entry: allDoctor.entrySet()) {
 			Integer key = entry.getKey();
 			System.out.print( "doc id:"+key+"  ");
@@ -278,13 +265,75 @@ public class DoctorRecommendDataset {
 				continue;
 			}
 			for(RatingEntity rating :docRatingList){
-				System.out.print(rating.getItemId() + "," + rating.getRating() +"  ");
+				System.out.print(rating.getDiseaseId() + "," + rating.getRating() +"  ");
+			}
+			System.out.println();
+		}		
+	}
+	
+	/**
+	 * 
+	 */
+	public void printAllRatingMatrix() {
+		int[][] ratingMatrix = new int[allDoctor.size()][allDisease.size()];
+		for (Entry<Integer, DoctorEntity> doctorEntry : allDoctor.entrySet()) {
+			for (Entry<Integer, DiseaseEntity> entry1 : allDisease.entrySet()) {
+				Integer docKey = doctorEntry.getKey();
+				// System.out.print( "doc id:"+key+"  ");
+//				List<RatingEntity> docRatingList = ratingsByDoctorId.get(key);
+				Integer disKey = entry1.getKey();
+				// System.out.print( "dis id:"+key1+"  ");
+				List<RatingEntity> disRatingList = ratingsByDoctorId.get(docKey);
+				if(disRatingList==null){
+					System.out.print(0+" ");
+					continue;
+				}
+				int r=0;
+				for(RatingEntity rating:disRatingList){
+					if (rating.getDiseaseId() == disKey) {
+						r = rating.getRating();
+//						System.out.print(rating.getRating() + " ");
+//						ratingMatrix[key][key1] = 0;
+//						System.out.println(ratingMatrix[key][key1] + " ");
+
+					} else {
+//						System.out.print(0+" ");
+//						ratingMatrix[key][key1] = ratingsByDoctorId.get(key)
+//								.get(key1).getRating();
+//						System.out.print(ratingMatrix[key][key1] + " ");
+					}
+				}
+				System.out.print(r+" ");
+				
 			}
 			System.out.println();
 		}
-		
 	}
-	
+			
+			
+			
+			
+			
+//		int[][] ratingMatrix = new int[allDoctor.size()][allDisease.size()];
+//		System.out.println("suoyouyonghu "+allDoctor.size());
+//		System.out.println("suoyoujibing "+allDisease.size());
+//			for (int i = 0; i < allDoctor.size(); i++) {
+//				System.out.println("ratingsByDoctorId"+ratingsByDoctorId.get(i));
+//				for (int j = 0; j < allDisease.size(); j++) {
+//					System.out.println("用户有关系否"+ratingsByDoctorId.get(i).get(j));
+//					if(ratingsByDoctorId.get(i).get(j)==null){
+//						
+//						ratingMatrix[i][j]=0;
+//						System.out.println(ratingMatrix[i][j]+" ");
+//					
+//					}else{
+//					ratingMatrix[i][j]=ratingsByDoctorId.get(i).get(j).getRating();
+//					System.out.print(ratingMatrix[i][j] + " ");
+//				}
+//				}
+//				System.out.println();
+//			}
+
 	
 	/**
 	 * 将一串字符串用分号的形式分割，存储到一个数组当中
@@ -364,18 +413,6 @@ public class DoctorRecommendDataset {
 		this.ratingsByDoctorId = ratingsByDoctorId;
 	}
 
-
-	public Map<Integer, List<Integer>> getDiseaseByDoctorId() {
-		return diseaseByDoctorId;
-	}
-
-
-	public void setDiseaseByDoctorId(Map<Integer, List<Integer>> diseaseByDoctorId) {
-		this.diseaseByDoctorId = diseaseByDoctorId;
-	}
-	
-	
-	
 	
 	
 	
