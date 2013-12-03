@@ -8,7 +8,7 @@ public class TestRecommend {
 		// TODO Auto-generated method stub
 		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 //		ds.printAllRating();
-		ds.printAllRatingMatrix();
+//		ds.printAllRatingMatrix();
 		RecommendDoctor re =new RecommendDoctor(ds);
 		
 		DoctorEntity d1 = new DoctorEntity();
@@ -22,7 +22,7 @@ public class TestRecommend {
 		int count1 = re.getSimilarityBySumCommonRating(d1, d2);
 		System.out.println("用户"+d1.getId()+"与用户"+d2.getId()+"相似度"+count1);
 		
-		
+		re.getAllSimilarityByCommonRating();
 		
 	}
 }

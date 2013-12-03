@@ -270,9 +270,23 @@ public class DoctorRecommendDataset {
 			System.out.println();
 		}		
 	}
-	
 	/**
-	 * 
+	 * 打印出所有医生的相似个数
+	 * @param allDoctor
+	 * @param doctorSimilarity
+	 */
+	public void printAllDoctorSimilartiy(List<DoctorEntity> allDoctor,
+			int[][] doctorSimilarity) {
+		for (int i = 0; i < allDoctor.size(); i++) {
+
+			for (int j = 0; j < allDoctor.size(); j++) {
+				System.out.print(doctorSimilarity[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	/**
+	 * 打印医生对疾病的评分
 	 */
 	public void printAllRatingMatrix() {
 		int[][] ratingMatrix = new int[allDoctor.size()][allDisease.size()];
@@ -292,19 +306,9 @@ public class DoctorRecommendDataset {
 				for(RatingEntity rating:disRatingList){
 					if (rating.getDiseaseId() == disKey) {
 						r = rating.getRating();
-//						System.out.print(rating.getRating() + " ");
-//						ratingMatrix[key][key1] = 0;
-//						System.out.println(ratingMatrix[key][key1] + " ");
-
-					} else {
-//						System.out.print(0+" ");
-//						ratingMatrix[key][key1] = ratingsByDoctorId.get(key)
-//								.get(key1).getRating();
-//						System.out.print(ratingMatrix[key][key1] + " ");
-					}
+					} 
 				}
 				System.out.print(r+" ");
-				
 			}
 			System.out.println();
 		}
