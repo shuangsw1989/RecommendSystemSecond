@@ -96,7 +96,7 @@ public class RecommendDoctor {
 
 		// 如果这两个疾病集合有一个为空，则说明两个用户不相似，返回0
 		if (dis1 == null || dis2 == null) {
-			System.err.println("用户不存在");
+			System.err.println("医生没有治过病");
 			return 0;
 
 		}
