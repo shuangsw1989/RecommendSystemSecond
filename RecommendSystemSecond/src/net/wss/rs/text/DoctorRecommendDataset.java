@@ -45,7 +45,7 @@ public class DoctorRecommendDataset {
 	 */
 	private Map<Integer, List<RatingEntity>> ratingsByDiseaseId = new HashMap<Integer, List<RatingEntity>>();
 /**
- * 获取某个用户对某个疾病的诊断次数
+ * 获取某个医生对某个疾病的诊断次数
  */
 	private Map<Integer,Integer> ratingByDiseaseIdDocId = new HashMap<Integer,Integer>();
 	/**
@@ -183,7 +183,7 @@ public class DoctorRecommendDataset {
 						continue;
 					}
 
-					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
+				String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
 				int docId = Integer.parseInt(array[0]);
 				int disId = Integer.parseInt(array[1]);
 				int rating = Integer.parseInt(array[2]);
@@ -324,7 +324,7 @@ public class DoctorRecommendDataset {
 //			for (int i = 0; i < allDoctor.size(); i++) {
 //				System.out.println("ratingsByDoctorId"+ratingsByDoctorId.get(i));
 //				for (int j = 0; j < allDisease.size(); j++) {
-//					System.out.println("用户有关系否"+ratingsByDoctorId.get(i).get(j));
+//					System.out.println("医生有关系否"+ratingsByDoctorId.get(i).get(j));
 //					if(ratingsByDoctorId.get(i).get(j)==null){
 //						
 //						ratingMatrix[i][j]=0;

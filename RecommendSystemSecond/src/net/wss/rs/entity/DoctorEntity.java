@@ -3,7 +3,7 @@ package net.wss.rs.entity;
 public class DoctorEntity {
 private int id;
 private String name;
-private String cureDisease;
+private String cureDisease;//医生所治的疾病
 public int getId() {
 	return id;
 }

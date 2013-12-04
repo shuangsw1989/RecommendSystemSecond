@@ -4,7 +4,7 @@ public class RatingEntity {
 
 	private int doctorId;
 	private int diseaseId;
-	private int rating;
+	private int rating;//’Ô¥Œ
 	
 	public RatingEntity() {
 		super();

@@ -20,10 +20,10 @@ public class TestRecommend {
 		d2.setId(2);
 		
 		int count = re.getSimilarityByCommonRating(d1, d2);
-		System.out.println("用户"+d1.getId()+"与用户"+d2.getId()+"相似度"+count);
+		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count);
 		
 		int count1 = re.getSimilarityBySumCommonRating(d1, d2);
-		System.out.println("用户"+d1.getId()+"与用户"+d2.getId()+"相似度"+count1);
+		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count1);
 		
 		System.out.println("两个医生共同看的病的个数，对角线是这个医生一共看过多少病：");
 		int[][] allDoctorSimilarity = re.getAllDoctorSimilarity(1);
