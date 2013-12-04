@@ -51,7 +51,7 @@ public class RecommendDoctor {
 	 */
 	public int[][] getAllSimilarityByCommonRating() {
 		int allDoctorSize=ds.getAllDoctor().size();
-		System.out.println("allDoctorSize"+allDoctorSize);
+//		System.out.println("allDoctorSize"+allDoctorSize);
 		
 		int[][] doctorSimilarity = new int[allDoctorSize+1][allDoctorSize+1];
 	
@@ -65,8 +65,8 @@ public class RecommendDoctor {
 				if (doc2.getId() > doc1.getId()) {
 					continue;// 跳出本次循环，执行下次循环
 				}
-				System.out.println(doc1.getId());
-				System.out.println(doc2.getId());
+//				System.out.println(doc1.getId());
+//				System.out.println(doc2.getId());
 				int count = getSimilarityByCommonRating(doc1, doc2);// 找出相似的个数
 				doctorSimilarity[i][j] = count;
 				doctorSimilarity[j][i] = count;// 因为是个对称的
