@@ -2,6 +2,7 @@ package net.wss.rs.re;
 
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.text.DoctorRecommendDataset;
+import net.wss.rs.util.Sort;
 
 public class TestRecommend {
 	public static void main(String[] args) {
@@ -25,7 +26,21 @@ public class TestRecommend {
 		System.out.println("用户"+d1.getId()+"与用户"+d2.getId()+"相似度"+count1);
 		
 		System.out.println("两个医生共同看的病的个数，对角线是这个医生一共看过多少病：");
-		re.getAllSimilarityByCommonRating();
+		int[][] allDoctorSimilarity = re.getAllDoctorSimilarity(1);
+		int[] doctor2Sim = allDoctorSimilarity[2];
+		int[] doctorSimIndexAsc=Sort.similaritySort(doctor2Sim);
+		
+		for(int i=0; i< doctorSimIndexAsc.length;i++){
+			System.out.print(doctorSimIndexAsc[i] + " ");
+		}
+		System.out.println();
+		
+		int kSim =3+1;
+		for(int i=0; i<kSim ;i++){
+			System.out.print(doctorSimIndexAsc[i] + " ");
+		}
+		System.out.println();
+		
 		
 	}
 }

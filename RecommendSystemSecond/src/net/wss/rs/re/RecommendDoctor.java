@@ -1,10 +1,10 @@
 package net.wss.rs.re;
 
 import java.util.List;
-import java.util.Map;
+
 import java.util.Map.Entry;
 
-import net.wss.rs.entity.DiseaseEntity;
+
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.RatingEntity;
 import net.wss.rs.text.DoctorRecommendDataset;
@@ -73,9 +73,8 @@ public class RecommendDoctor {
 			}
 		}
 		
-		for (int i = 0; i < allDoctorSize; i++) {
-
-			for (int j = 0; j < allDoctorSize; j++) {
+		for (int i = 0; i < doctorSimilarity.length; i++) {
+			for (int j = 0; j < doctorSimilarity[i].length; j++) {
 				System.out.print(doctorSimilarity[i][j] + " ");
 			}
 			System.out.println();
@@ -93,10 +92,10 @@ public class RecommendDoctor {
 				.get(doctor1.getId());// 获取某一个用户所包含的疾病
 		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
 				.get(doctor2.getId());
-
+		
 		// 如果这两个疾病集合有一个为空，则说明两个用户不相似，返回0
 		if (dis1 == null || dis2 == null) {
-			System.err.println("医生没有治过病");
+//			System.err.println("医生没有治过病");
 			return 0;
 
 		}
@@ -119,4 +118,53 @@ public class RecommendDoctor {
 		return min;
 	}
 
+	
+	
+	
+	
+	/**
+	 * 计算所有医生的相似度
+	 */
+	public int[][] getAllDoctorSimilarity(int type) {
+		int allDoctorSize=ds.getAllDoctor().size();
+//		System.out.println("allDoctorSize"+allDoctorSize);
+		
+		int[][] doctorSimilarity = new int[allDoctorSize+1][allDoctorSize+1];
+	
+		for (Entry<Integer, DoctorEntity> entry: ds.getAllDoctor().entrySet()) {
+			DoctorEntity doc1 = entry.getValue();
+			int i= doc1.getId();
+			for (Entry<Integer, DoctorEntity> entry2: ds.getAllDoctor().entrySet()) {
+				
+				DoctorEntity doc2 = entry2.getValue();
+				int j= doc2.getId();
+				if (doc2.getId() > doc1.getId()) {
+					continue;// 跳出本次循环，执行下次循环
+				}
+//				System.out.println(doc1.getId());
+//				System.out.println(doc2.getId());
+				int count=0;
+				if(type ==0){
+					count = getSimilarityByCommonRating(doc1, doc2);// 找出相似的个数
+				}else if(type==1){
+					count = getSimilarityBySumCommonRating(doc1, doc2);// 找出相似的个数
+				}else{
+					System.out.println("error");
+					return null;
+				}
+				
+				doctorSimilarity[i][j] = count;
+				doctorSimilarity[j][i] = count;// 因为是个对称的
+			}
+		}
+		
+		for (int i = 0; i < doctorSimilarity.length; i++) {
+			for (int j = 0; j < doctorSimilarity[i].length; j++) {
+				System.out.print(doctorSimilarity[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		return doctorSimilarity;
+	}
 }
