@@ -3,6 +3,15 @@ package net.wss.rs.util;
 public class Sort {
 
 	/**
+	 * 将每个医生对疾病的评分按照降序排列
+	 * 
+	 * 
+	 */
+	public static void ratingSort(){
+		
+	}
+	
+	/**
 	 * 对某一个医生的相似结果排序，按照降序的方式
 	 * value接收这个医生的所有数据
 	 * index接收下标，目的使排序前后的下标保持一致
