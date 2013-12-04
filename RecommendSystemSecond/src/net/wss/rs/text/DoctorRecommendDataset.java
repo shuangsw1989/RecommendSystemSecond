@@ -223,8 +223,6 @@ public class DoctorRecommendDataset {
 		ratingsForKey.add(rating);
 	}
 	
-	
-	
 	/**
 	 * 打印所有医生的key-value,key,value是医生的id
 	 */
@@ -244,7 +242,7 @@ public class DoctorRecommendDataset {
 	public void printAllDisease() {
 
 		for (Entry<Integer, DiseaseEntity> entry: allDisease.entrySet()) {
-			Integer key = entry.getKey();
+			Integer disKey = entry.getKey();
 			DiseaseEntity  value = entry.getValue();
 			
 			System.out.println("dis id:"+value.getId());
@@ -257,9 +255,9 @@ public class DoctorRecommendDataset {
 	public void printAllRating() {
 
 		for (Entry<Integer, DoctorEntity> entry: allDoctor.entrySet()) {
-			Integer key = entry.getKey();
-			System.out.print( "doc id:"+key+"  ");
-			List<RatingEntity> docRatingList = ratingsByDoctorId.get(key);
+			Integer docKey = entry.getKey();
+			System.out.print( "doc id:"+docKey+"  ");
+			List<RatingEntity> docRatingList = ratingsByDoctorId.get(docKey);
 			if(docRatingList == null){
 				System.out.println();
 				continue;
