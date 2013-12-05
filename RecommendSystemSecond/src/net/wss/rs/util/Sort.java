@@ -1,15 +1,18 @@
 package net.wss.rs.util;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+
+import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.entity.DoctorEntity;
+import net.wss.rs.entity.RatingEntity;
+
+
 public class Sort {
 
-	/**
-	 * 将每个医生对疾病的评分按照降序排列
-	 * 
-	 * 
-	 */
-	public static void ratingSort(){
-		
-	}
+
+
 	
 	/**
 	 * 对某一个医生的相似结果排序，按照降序的方式
@@ -41,4 +44,29 @@ public class Sort {
 		}
 		return index;
 	}
+	
+	
+//	public static int[]  similaritySort(List<Integer> ratingList){
+//		int[] value = doctorSimilarity;		
+//		int[] index = new int[value.length]; 
+//		for(int i=0;i < value.length;i++){
+//			index[i]=i;//先给下标赋值
+//		}
+//		
+//		for (int i = 0; i < value.length - 1; i++) {
+//			for (int j = i + 1; j < value.length; j++) {
+//				if (value[i] < value[j]) {// 大到小，小到大改>
+//					int tempc = value[i];
+//					value[i] = value[j];
+//					value[j] = tempc;
+//
+//					int tempb = index[i];
+//					index[i] = index[j];
+//					index[j] = tempb;
+//				}
+//			}
+//		}
+//		return index;
+//	}
+	
 }

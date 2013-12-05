@@ -27,31 +27,28 @@ public class DoctorRecommendDataset {
 	/**
 	 * 所有疾病的诊次
 	 */
-	private List<RatingEntity> allRating = new ArrayList<RatingEntity>();
+	public List<RatingEntity> allRating = new ArrayList<RatingEntity>();
 
 	/**
 	 * 得到所有的医生.
 	 */
-	private Map<Integer, DoctorEntity> allDoctor = new HashMap<Integer, DoctorEntity>();
+	public Map<Integer, DoctorEntity> allDoctor = new HashMap<Integer, DoctorEntity>();
 
 	/**
 	 * 得到所有的疾病
 	 */
-	private Map<Integer, DiseaseEntity> allDisease = new HashMap<Integer, DiseaseEntity>();
+	public Map<Integer, DiseaseEntity> allDisease = new HashMap<Integer, DiseaseEntity>();
 
 	/**
 	 *通过疾病的id得到所有疾病的诊次
 	 * 
 	 */
-	private Map<Integer, List<RatingEntity>> ratingsByDiseaseId = new HashMap<Integer, List<RatingEntity>>();
-/**
- * 获取某个医生对某个疾病的诊断次数
- */
-	private Map<Integer,Integer> ratingByDiseaseIdDocId = new HashMap<Integer,Integer>();
+	public Map<Integer, List<RatingEntity>> ratingsByDiseaseId = new HashMap<Integer, List<RatingEntity>>();
+
 	/**
 	 * 通过医生的id得到所有疾病的诊次
 	 */
-	Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
+	public Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
 	
 
 	
@@ -392,18 +389,6 @@ public class DoctorRecommendDataset {
 			Map<Integer, List<RatingEntity>> ratingsByDiseaseId) {
 		this.ratingsByDiseaseId = ratingsByDiseaseId;
 	}
-
-
-	public Map<Integer, Integer> getRatingByDiseaseIdDocId() {
-		return ratingByDiseaseIdDocId;
-	}
-
-
-	public void setRatingByDiseaseIdDocId(
-			Map<Integer, Integer> ratingByDiseaseIdDocId) {
-		this.ratingByDiseaseIdDocId = ratingByDiseaseIdDocId;
-	}
-
 
 	public Map<Integer, List<RatingEntity>> getRatingsByDoctorId() {
 		return ratingsByDoctorId;
