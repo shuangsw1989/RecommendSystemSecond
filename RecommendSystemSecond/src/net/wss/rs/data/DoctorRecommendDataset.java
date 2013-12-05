@@ -1,4 +1,4 @@
-package net.wss.rs.similarity;
+package net.wss.rs.data;
 
 import java.io.BufferedReader;
 import java.io.File;

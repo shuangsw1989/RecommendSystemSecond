@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map.Entry;
 
 
+import net.wss.rs.data.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.RatingEntity;
-import net.wss.rs.similarity.DoctorRecommendDataset;
 
 public class RecommendDoctor {
 	DoctorRecommendDataset ds;

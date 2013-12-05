@@ -1,7 +1,7 @@
 package net.wss.rs.recommend;
 
+import net.wss.rs.data.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.similarity.DoctorRecommendDataset;
 import net.wss.rs.util.Sort;
 
 public class TestRecommend {
