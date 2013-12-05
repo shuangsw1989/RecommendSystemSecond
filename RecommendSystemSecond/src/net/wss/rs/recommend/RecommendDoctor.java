@@ -1,4 +1,4 @@
-package net.wss.rs.re;
+package net.wss.rs.recommend;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.RatingEntity;
-import net.wss.rs.text.DoctorRecommendDataset;
+import net.wss.rs.similarity.DoctorRecommendDataset;
 
 public class RecommendDoctor {
 	DoctorRecommendDataset ds;

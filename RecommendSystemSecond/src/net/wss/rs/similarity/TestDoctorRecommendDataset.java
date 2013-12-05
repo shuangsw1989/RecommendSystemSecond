@@ -1,4 +1,4 @@
-package net.wss.rs.text;
+package net.wss.rs.similarity;
 
 public class TestDoctorRecommendDataset {
 
