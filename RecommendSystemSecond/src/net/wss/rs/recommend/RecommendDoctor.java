@@ -117,10 +117,6 @@ public class RecommendDoctor {
 		}
 		return min;
 	}
-
-	
-	
-	
 	
 	/**
 	 * 计算所有医生的相似度

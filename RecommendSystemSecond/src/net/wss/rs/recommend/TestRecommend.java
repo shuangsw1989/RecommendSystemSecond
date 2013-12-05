@@ -27,19 +27,26 @@ public class TestRecommend {
 		
 		System.out.println("两个医生共同看的病的个数，对角线是这个医生一共看过多少病：");
 		int[][] allDoctorSimilarity = re.getAllDoctorSimilarity(0);
-		int[] doctor2Sim = allDoctorSimilarity[2];//存入的是count
-		int[] doctorSimIndexAsc=Sort.similaritySort(doctor2Sim);//存下标索引即用户的id
 		
-		for(int i=0; i< doctorSimIndexAsc.length;i++){
-			System.out.print(doctorSimIndexAsc[i] + " ");
+		for(int docId=1; docId< allDoctorSimilarity.length;docId++){
+			int[] doctorSim = allDoctorSimilarity[docId];//存入的是count
+			int[] doctorSimIndexAsc=Sort.similaritySort(doctorSim);//存下标索引即用户的id
+			
+			
+			System.out.println("与医生"+docId+"相似的结果，降序排列");
+			for(int i=0; i< doctorSimIndexAsc.length;i++){
+				System.out.print(doctorSimIndexAsc[i] + " ");
+			}
+			System.out.println();
+			System.out.println("与医生"+docId+"最相似得前4个医生");
+			int kSim =3+1;
+			for(int i=0; i<kSim ;i++){
+				
+				System.out.print(doctorSimIndexAsc[i] + " ");
+			}
+			System.out.println();
 		}
-		System.out.println();
 		
-		int kSim =3+1;
-		for(int i=0; i<kSim ;i++){
-			System.out.print(doctorSimIndexAsc[i] + " ");
-		}
-		System.out.println();
 		
 		
 	}
