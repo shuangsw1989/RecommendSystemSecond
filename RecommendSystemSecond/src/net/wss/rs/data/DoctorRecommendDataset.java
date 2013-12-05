@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.wss.rs.DataSet;
+
 import net.wss.rs.entity.DiseaseEntity;
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.RatingEntity;
