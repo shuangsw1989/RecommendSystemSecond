@@ -1,13 +1,15 @@
 package net.wss.rs.recommend;
 
+import net.wss.rs.data.DataSetConfig;
 import net.wss.rs.data.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.util.Sort;
 
 public class TestRecommend {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		DoctorRecommendDataset ds = new DoctorRecommendDataset();
+
+//		DoctorRecommendDataset ds = new DoctorRecommendDataset();
+		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		System.out.println("打印所有的评分");
 		ds.printAllRating();
 		System.out.println("打印所有的评分矩阵");
