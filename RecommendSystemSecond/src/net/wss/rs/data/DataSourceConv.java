@@ -38,6 +38,7 @@ public class DataSourceConv {
 					String[] docInfo = lineTxt.split(";");
 					
 					if(docInfo.length>=2){
+						//将获得数据的前两列写入到dotorall.txt中
 						FileUtil.appendData(DataSetConfig.AllDoctorPath, docInfo[0]+DataSetConfig.AttrSplit+docInfo[1]);						
 					}else{
 						continue;
@@ -65,11 +66,15 @@ public class DataSourceConv {
 						// System.out.println(disName[0]);
 						if (disNameRatingArray.length == 2 && disNameRatingArray[0].trim() != "") {
 							disName = disNameRatingArray[0];
-							disId = getDiseaseId(disName);
+							disId = getDiseaseId(disName);//调用方法获得疾病的id
 							rating= disNameRatingArray[1].trim();
+							//将医生id,疾病id,相对应疾病的诊次，写入ratingall.txt文件中
 							FileUtil.appendData(DataSetConfig.AllRatingPath,docInfo[0]+ DataSetConfig.AttrSplit+disId+DataSetConfig.AttrSplit+rating);
 //							System.out.print(disName[0] + " " + disName[1]);
-							
+				/**
+				 * 当处理后的alldata.txt文件中，数据格式有错误的时候，使用下面的这些部分去处理
+				 * 如果处理后的数据集不存在问题，利用上面的if即可写入相关的文件		
+				 */
 						} else if(disNameRatingArray.length==1){
 //							System.out.print("error: ");
 							int len = disNameRatingArray[0].length();
@@ -88,6 +93,7 @@ public class DataSourceConv {
 								disId = getDiseaseId(disName);
 								rating=numStr.trim();
 							}
+							//将医生id,疾病id,相对应疾病的诊次，写入ratingall.txt文件中
 							FileUtil.appendData(DataSetConfig.AllRatingPath,docInfo[0]+ DataSetConfig.AttrSplit+disId+DataSetConfig.AttrSplit+rating);
 						}
 						
@@ -116,6 +122,9 @@ public class DataSourceConv {
 	
 	/**
 	 * 获取疾病的id,
+	 * 边判断重复，边写入，然后给其赋一个id
+	 * 首先先判断diseaseall.txt文件中是否有数据
+	 * 
 	 * @param disName
 	 * @return
 	 */
@@ -152,6 +161,7 @@ public class DataSourceConv {
 		
 		int newid = Integer.valueOf(maxId)+1;
 		
+		//将获得的疾病写入到diseaseall.txt文件中		
 		FileUtil.appendData(DataSetConfig.AllDiseasePath,newid+DataSetConfig.AttrSplit+disName.trim());
 		
 		return String.valueOf(newid);

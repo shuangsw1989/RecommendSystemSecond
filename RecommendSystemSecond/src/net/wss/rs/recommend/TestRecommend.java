@@ -10,25 +10,25 @@ public class TestRecommend {
 
 //		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
-		System.out.println("打印所有的评分");
-		ds.printAllRating();
-		System.out.println("打印所有的评分矩阵");
-		ds.printAllRatingMatrix();
+//		System.out.println("打印所有的评分");
+//		ds.printAllRating();
+//		System.out.println("打印所有的评分矩阵");
+//		ds.printAllRatingMatrix();
 		RecommendDoctor re =new RecommendDoctor(ds);
-		
-		DoctorEntity d1 = new DoctorEntity();
-		d1.setId(1);
-		DoctorEntity d2 = new DoctorEntity();
-		d2.setId(2);
-		
-		int count = re.getSimilarityByCommonRating(d1, d2);
-		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count);
-		
-		int count1 = re.getSimilarityBySumCommonRating(d1, d2);
-		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count1);
+//		
+//		DoctorEntity d1 = new DoctorEntity();
+//		d1.setId(1);
+//		DoctorEntity d2 = new DoctorEntity();
+//		d2.setId(2);
+//		
+//		int count = re.getSimilarityByCommonRating(d1, d2);
+//		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count);
+//		
+//		int count1 = re.getSimilarityBySumCommonRating(d1, d2);
+//		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count1);
 		
 		System.out.println("两个医生共同看的病的个数，对角线是这个医生一共看过多少病：");
-		int[][] allDoctorSimilarity = re.getAllDoctorSimilarity(0);
+		int[][] allDoctorSimilarity = re.getAllDoctorSimilarity(1);
 		
 		for(int docId=1; docId< allDoctorSimilarity.length;docId++){
 			int[] doctorSim = allDoctorSimilarity[docId];//存入的是count
@@ -41,15 +41,12 @@ public class TestRecommend {
 			}
 			System.out.println();
 			System.out.println("与医生"+docId+"最相似得前4个医生");
-			int kSim =3+1;
+			int kSim =10+1;
 			for(int i=0; i<kSim ;i++){
 				
 				System.out.print(doctorSimIndexAsc[i] + " ");
 			}
 			System.out.println();
 		}
-		
-		
-		
 	}
 }

@@ -22,13 +22,14 @@ public class DiseaseKNNSimilarity {
 
 	/**
 	 * 将每个医生对疾病的评分按照降序排列
-
+	 * 取出前5个
 	 */
 	public void ratingSort(int k){
 		
 		for (Entry<Integer, DoctorEntity> entry: ds.allDoctor.entrySet()) {
-			Integer docKey = entry.getKey();
+			Integer docKey = entry.getKey();//获取一个医生的id
 			System.out.print( "doc id:"+docKey+"  ");
+			//根据id得到一个医生的所有疾病的诊次的集合
 			List<RatingEntity> docRatingList = ds.ratingsByDoctorId.get(docKey);
 			
 //			转换成array
@@ -41,7 +42,7 @@ public class DiseaseKNNSimilarity {
 				System.out.println();
 				continue;
 			}
-			
+			//将这个集合转换成数组的形式
 			RatingEntity[] docRatingArray = new  RatingEntity[docRatingList.size()];
 			docRatingList.toArray(docRatingArray);
 			
@@ -64,8 +65,6 @@ public class DiseaseKNNSimilarity {
 				System.out.print(docRatingList.get(docRatingIndexArray[i]).getDiseaseId()+"  ");
 			}
 			System.out.println();
-
-			
 		}
 		
 	}
