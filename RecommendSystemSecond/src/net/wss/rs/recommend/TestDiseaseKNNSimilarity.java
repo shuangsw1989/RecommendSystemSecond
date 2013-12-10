@@ -4,7 +4,7 @@ import net.wss.rs.confi.Constant;
 import net.wss.rs.data.DataSetConfig;
 import net.wss.rs.data.DoctorRecommendDataset;
 
-public class TestKNN {
+public class TestDiseaseKNNSimilarity {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		DoctorRecommendDataset ds = new DoctorRecommendDataset();
