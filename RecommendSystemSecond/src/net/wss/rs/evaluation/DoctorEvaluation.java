@@ -18,6 +18,7 @@ public class DoctorEvaluation {
 	}
 	/**
 	 * 计算两个用户的相似度
+	 * 计算的方法是欧式距离的方法
 	 * @param doctor1
 	 * @param doctor2
 	 * @return
@@ -113,5 +114,52 @@ public class DoctorEvaluation {
 		}
 	
 		return doctorSimilarity;
+	}
+	/**
+	 * 计算两个用户的相似度
+	 * 计算方法是雅克比距离
+	 * @param doctor1
+	 * @param doctor2
+	 * @return
+	 */
+	public double getSimilarityByJacobi(DoctorEntity doctor1,
+			DoctorEntity doctor2) {
+		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
+				.get(doctor1.getId());// 获取某一个医生所包含的疾病
+		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
+				.get(doctor2.getId());
+		
+		int commDiseases=0;
+		if (dis1 == null || dis2 == null) {
+//			System.err.println("医生没有治过病");
+			return 0;
+		}
+		// 判断两个疾病集合是否有交集
+		double sim=0.0d;
+		int firstDiseaseSum=0;
+		int secondDiseaseSum=0;
+		for (int i = 0; i < dis1.size(); i++) {
+			firstDiseaseSum++;
+		
+			for (int j = 0; j < dis2.size(); j++) {
+				if(i==0){
+				secondDiseaseSum++;
+				}
+				
+				if (dis1.get(i).getDiseaseId() == dis2.get(j).getDiseaseId()) {
+					commDiseases++;
+//					int dis1Rating = dis1.get(i).getRating();
+//					int dis2Rating = dis2.get(j).getRating();
+//					System.out.println("common dis id:"+dis1.get(i).getDiseaseId()+" "+dis1Rating+" "+dis2Rating);
+				}
+			}
+			
+		}
+		System.out.println(commDiseases);
+		System.out.println(firstDiseaseSum);	
+		System.out.println(secondDiseaseSum);
+		sim = commDiseases*1.0/((firstDiseaseSum+secondDiseaseSum-commDiseases)+1);
+		System.out.println(String.format("%.5f",sim));	
+		return sim;
 	}
 }
