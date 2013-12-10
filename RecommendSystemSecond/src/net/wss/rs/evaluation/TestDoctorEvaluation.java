@@ -38,9 +38,9 @@ public class TestDoctorEvaluation {
 		}
 		
 //		DoctorEntity d1 = new DoctorEntity();
-//		d1.setId(3);
+//		d1.setId(4);
 //		DoctorEntity d2 = new DoctorEntity();
-//		d2.setId(4);
+//		d2.setId(5);
 //		
 //	    double sim = de.getSimilarityByCommonRating(d1, d2);
 //		

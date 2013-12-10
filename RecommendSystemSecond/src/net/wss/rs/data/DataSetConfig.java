@@ -10,4 +10,5 @@ public class DataSetConfig {
 	public static String AttrSplit = ";";
 	//读取数据库获得的数据文件
 	public static String AllDataPath = "data/alldata.txt";
+	public static String SimiResultPath ="data/allsimi.txt";
 }

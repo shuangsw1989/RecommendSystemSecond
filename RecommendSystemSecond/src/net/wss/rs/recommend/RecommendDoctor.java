@@ -32,11 +32,9 @@ public class RecommendDoctor {
 		if (dis1 == null || dis2 == null) {
 //			System.err.println("医生没有看过病");
 			return 0;
-
 		}
 
 		// 判断两个疾病集合是否有交集，如果有则count+1
-
 		for (int i = 0; i < dis1.size(); i++) {
 			for (int j = 0; j < dis2.size(); j++) {
 				if (dis1.get(i).getDiseaseId() == dis2.get(j).getDiseaseId()) {
@@ -79,7 +77,6 @@ public class RecommendDoctor {
 			}
 			System.out.println();
 		}
-		
 		return doctorSimilarity;
 	}
 
@@ -97,7 +94,6 @@ public class RecommendDoctor {
 		if (dis1 == null || dis2 == null) {
 //			System.err.println("医生没有治过病");
 			return 0;
-
 		}
 
 		// 判断两个疾病集合是否有交集，如果有则count+1

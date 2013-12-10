@@ -17,9 +17,9 @@ import net.wss.rs.util.StringUtil;
 public class DataSourceConv {
 	
 	/**
-	 * 读newdisease数据集处理疾病的名字及相对应的诊次
+	 * 读alldata数据集处理疾病的名字及相对应的诊次
 	 */
-	public void readNewDiseaseTxtFile(String filePath) {
+	public void readAllDataTxtFile(String filePath) {
 		ReadDBTable rdtable=new ReadDBTable();
 		File file = new File(filePath);
 
@@ -106,13 +106,10 @@ public class DataSourceConv {
 				read.close();
 
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -149,32 +146,18 @@ public class DataSourceConv {
 				bufferedReader.close();
 				read.close();
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
 		
 		int newid = Integer.valueOf(maxId)+1;
-		
 		//将获得的疾病写入到diseaseall.txt文件中		
 		FileUtil.appendData(DataSetConfig.AllDiseasePath,newid+DataSetConfig.AttrSplit+disName.trim());
 		
 		return String.valueOf(newid);
 		
 	}
-	
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

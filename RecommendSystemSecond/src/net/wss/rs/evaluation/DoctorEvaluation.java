@@ -1,11 +1,14 @@
 package net.wss.rs.evaluation;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 
+import net.wss.rs.data.DataSetConfig;
 import net.wss.rs.data.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.util.FileUtil;
 
 public class DoctorEvaluation {
 	DoctorRecommendDataset ds;
@@ -13,61 +16,6 @@ public class DoctorEvaluation {
 	public DoctorEvaluation(DoctorRecommendDataset ds) {
 		this.ds = ds;
 	}
-//	/**
-//	 * 计算两个的差值
-//	 * @param a
-//	 * @param b
-//	 * @return
-//	 */
-//	public int calculatePoor(int a,int b){
-//		int poor=0;
-//		poor=a-b;
-//		return poor;
-//	}
-//	/**
-//	 * 计算差值的平方
-//	 * @param poor
-//	 * @return
-//	 */
-//	public int calculateSquare(int poor){
-//		int square =0;
-//		square=poor*poor;
-//		return square;
-//	}
-//	/**
-//	 * 计算平方和
-//	 * @param square
-//	 * @return
-//	 */
-//	public int calculateSquareAnd(int square){
-//		int squareAnd=0;
-//		squareAnd=squareAnd+square;
-//		return squareAnd;
-//	}
-//	/**
-//	 * 对平方和求平方根
-//	 * @param squareAnd
-//	 * @return
-//	 */
-//	public double calculateSquareRoot(int squareAnd){
-//		double squareAndRoot=0.0;
-//		squareAndRoot=Math.sqrt(squareAnd);
-//		return squareAndRoot;
-//	}
-//	/**
-//	 * 取得计算后的结果
-//	 * @param a
-//	 * @param b
-//	 * @return
-//	 */
-//	public double calculateResult(int a,int b){
-//		double result =0.0;
-//		int poor=calculatePoor(a,b);
-//		int square=calculateSquare(poor);
-//		int squareAnd=calculateSquareAnd(square);
-//		result=calculateSquareRoot(squareAnd);
-//		return result;
-//	}
 	/**
 	 * 计算两个用户的相似度
 	 * @param doctor1
@@ -113,10 +61,11 @@ public class DoctorEvaluation {
 				}
 			}
 		}
-//		System.out.println(sim);
-//		if(commDiseases>0){
+		System.out.println(sim);
+		if(commDiseases>0){
 //			sim=1.0d - Math.tanh(sim);
-//		}
+			sim=1.0/(sim+1);
+		}
 		
 		return sim;
 	}
@@ -148,13 +97,21 @@ public class DoctorEvaluation {
 			}
 		}
 		
+		File file = new File(DataSetConfig.SimiResultPath);
+		if (file.exists()) {		
+			file.delete();
+		} 
+		
 		for (int i = 0; i < doctorSimilarity.length; i++) {
+			String line="";
 			for (int j = 0; j < doctorSimilarity[i].length; j++) {
-				System.out.print(doctorSimilarity[i][j] + " ");
+				line +=String.format("%.4f",doctorSimilarity[i][j]) + " ";
+//				System.out.print(String.format("%.4f",doctorSimilarity[i][j]) + " ");
 			}
 			System.out.println();
+			FileUtil.appendData(DataSetConfig.SimiResultPath, line);
 		}
-		
+	
 		return doctorSimilarity;
 	}
 }

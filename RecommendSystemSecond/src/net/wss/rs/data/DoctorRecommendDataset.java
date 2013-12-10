@@ -87,7 +87,7 @@ public class DoctorRecommendDataset {
 
 
 	/**
-	 * 读doctor数据集，得出有多少个医生
+	 * 读doctorall数据集，得出有多少个医生
 	 */
 	public void readDoctorTxtFile(String filePath) {
 
@@ -137,7 +137,7 @@ public class DoctorRecommendDataset {
 	}
 
 	/**
-	 * 读disease数据集，获取有多少种病
+	 * 读diseaseall数据集，获取有多少种病
 	 */
 	public void readDiseaseTxtFile(String filePath) {
 
@@ -185,7 +185,7 @@ public class DoctorRecommendDataset {
 	
 
 	/**
-	 * 读取所有的rating
+	 * 读取所有的ratingall
 	 */
 	public void loadRatings(String filePath) {
 
@@ -337,26 +337,6 @@ public class DoctorRecommendDataset {
 		}
 	}
 
-	// int[][] ratingMatrix = new int[allDoctor.size()][allDisease.size()];
-	// System.out.println("suoyouyonghu "+allDoctor.size());
-	// System.out.println("suoyoujibing "+allDisease.size());
-	// for (int i = 0; i < allDoctor.size(); i++) {
-	// System.out.println("ratingsByDoctorId"+ratingsByDoctorId.get(i));
-	// for (int j = 0; j < allDisease.size(); j++) {
-	// System.out.println("医生有关系否"+ratingsByDoctorId.get(i).get(j));
-	// if(ratingsByDoctorId.get(i).get(j)==null){
-	//
-	// ratingMatrix[i][j]=0;
-	// System.out.println(ratingMatrix[i][j]+" ");
-	//
-	// }else{
-	// ratingMatrix[i][j]=ratingsByDoctorId.get(i).get(j).getRating();
-	// System.out.print(ratingMatrix[i][j] + " ");
-	// }
-	// }
-	// System.out.println();
-	// }
-
 	/**
 	 * 将一串字符串用分号的形式分割，存储到一个数组当中
 	 * 
@@ -366,7 +346,7 @@ public class DoctorRecommendDataset {
 	 */
 	public static String[] split(String lineTxt) {
 		// String[] array = lineTxt.split("\\s+");//空格的形式分割
-		String[] array = lineTxt.split(";");
+		String[] array = lineTxt.split(";");//分号分割字符串
 		// System.out.println(array[0]+" ,"+array[1]);
 		return array;
 	}

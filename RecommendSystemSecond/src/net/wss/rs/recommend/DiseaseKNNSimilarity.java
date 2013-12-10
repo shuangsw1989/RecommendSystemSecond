@@ -17,8 +17,6 @@ public class DiseaseKNNSimilarity {
 	public DiseaseKNNSimilarity(DoctorRecommendDataset ds) {
 		this.ds = ds;
 	}
-	
-	
 
 	/**
 	 * 将每个医生对疾病的评分按照降序排列
