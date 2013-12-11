@@ -12,7 +12,9 @@ public class TestDiseaseKNNSimilarity {
 		
 		DiseaseKNNSimilarity knn = new DiseaseKNNSimilarity(ds);
 		
-		knn.ratingSort(Constant.biggestratingnum);
+		knn.ratingSortByDocId(2,2);
+		
+//		knn.ratingSort(Constant.biggestratingnum);
 		
 	}
 }
