@@ -10,10 +10,6 @@ import net.wss.rs.entity.RatingEntity;
 
 
 public class Sort {
-
-
-
-	
 	/**
 	 * 对某一个医生的相似结果排序，按照降序的方式
 	 * value接收这个医生的所有数据

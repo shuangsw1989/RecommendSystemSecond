@@ -25,7 +25,6 @@ public class ReadDBTable {
 	}
 
 	ResultSet rs = null;
-	
 	Statement stmt = null;
 	Connection conn=null;
 	

@@ -24,7 +24,7 @@ public class DoctorEvaluation {
 	 * @return
 	 */
 	
-	public double getSimilarityByCommonRating(DoctorEntity doctor1,
+	public double getSimilarityByEucliddistance(DoctorEntity doctor1,
 			DoctorEntity doctor2) {
 		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
@@ -62,7 +62,7 @@ public class DoctorEvaluation {
 				}
 			}
 		}
-		System.out.println(sim);
+//		System.out.println("欧式距离相似度："+sim);
 		if(commDiseases>0){
 //			sim=1.0d - Math.tanh(sim);
 			sim=1.0/(sim+1);
@@ -72,8 +72,12 @@ public class DoctorEvaluation {
 	}
 	/**
 	 * 计算所有医生的相似度
+	 * @type
+	 * 0表示利用的是欧式距离
+	 * 1表示利用的是雅克比
 	 */
-	public double[][] getAllDoctorSimilarity() {
+	
+	public double[][] getAllDoctorSimilarity(int type) {
 		int allDoctorSize=ds.getAllDoctor().size();
 //		System.out.println("allDoctorSize"+allDoctorSize);
 		
@@ -92,9 +96,15 @@ public class DoctorEvaluation {
 //				System.out.println(doc1.getId());
 //				System.out.println(doc2.getId());
 				double count=0;
-				count = getSimilarityByCommonRating(doc1, doc2);// 找出相似的个数
-				doctorSimilarity[i][j] = count;
-				doctorSimilarity[j][i] = count;// 因为是个对称的
+				if(type==0){
+					count = getSimilarityByEucliddistance(doc1, doc2);// 找出相似的个数
+					doctorSimilarity[i][j] = count;
+					doctorSimilarity[j][i] = count;// 因为是个对称的
+				}else if(type==1){
+					count = getSimilarityByJacobi(doc1, doc2);// 找出相似的个数
+					doctorSimilarity[i][j] = count;
+					doctorSimilarity[j][i] = count;// 因为是个对称的
+				}
 			}
 		}
 		
@@ -136,30 +146,18 @@ public class DoctorEvaluation {
 		}
 		// 判断两个疾病集合是否有交集
 		double sim=0.0d;
-		int firstDiseaseSum=0;
-		int secondDiseaseSum=0;
 		for (int i = 0; i < dis1.size(); i++) {
-			firstDiseaseSum++;
-		
 			for (int j = 0; j < dis2.size(); j++) {
-				if(i==0){
-				secondDiseaseSum++;
-				}
-				
 				if (dis1.get(i).getDiseaseId() == dis2.get(j).getDiseaseId()) {
 					commDiseases++;
-//					int dis1Rating = dis1.get(i).getRating();
-//					int dis2Rating = dis2.get(j).getRating();
-//					System.out.println("common dis id:"+dis1.get(i).getDiseaseId()+" "+dis1Rating+" "+dis2Rating);
 				}
 			}
-			
 		}
-		System.out.println(commDiseases);
-		System.out.println(firstDiseaseSum);	
-		System.out.println(secondDiseaseSum);
-		sim = commDiseases*1.0/((firstDiseaseSum+secondDiseaseSum-commDiseases)+1);
-		System.out.println(String.format("%.5f",sim));	
+//		System.out.println("两个医生治疗相同疾病的个数："+commDiseases);
+//		System.out.println("第一个医生所治疾病的个数："+dis1.size());	
+//		System.out.println("第二个医生所治疾病的个数："+dis2.size());
+		sim = commDiseases*1.0/(dis1.size()+dis2.size()-commDiseases);
+//		System.out.println("雅克比相似度："+String.format("%.5f",sim));	
 		return sim;
 	}
 }
