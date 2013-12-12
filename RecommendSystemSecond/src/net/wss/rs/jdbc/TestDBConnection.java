@@ -6,11 +6,18 @@ public class TestDBConnection {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DBConnection db= new DBConnection();
-		System.out.println(db.getConn());
-//		System.out.println("关闭数据库");
-//		db.close(db.getConn());
+		testDBConnection();//测试数据库连接
+		testCloseDB();//测试数据库的关闭
 
 	}
 
+	public static void testDBConnection() {
+		DBConnection db = new DBConnection();
+		System.out.println(db.getConn());
+	}
+
+	public static void testCloseDB() {
+		DBConnection db = new DBConnection();
+		db.close(db.getConn());
+	}
 }

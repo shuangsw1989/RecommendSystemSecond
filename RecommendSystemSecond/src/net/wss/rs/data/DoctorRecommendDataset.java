@@ -54,7 +54,10 @@ public class DoctorRecommendDataset {
 	 * 通过医生的id得到所有疾病的诊次
 	 */
 	public Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
-
+	/**
+	 * 通过医生id获得评分从大到小排序
+	 */
+	public Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
 	/**
 	 * 测试数据源
 	 */
@@ -391,6 +394,15 @@ public class DoctorRecommendDataset {
 	public void setRatingsByDoctorId(
 			Map<Integer, List<RatingEntity>> ratingsByDoctorId) {
 		this.ratingsByDoctorId = ratingsByDoctorId;
+	}
+
+	public Map<Integer, List<RatingEntity>> getSortedRatingsByDoctorId() {
+		return sortedRatingsByDoctorId;
+	}
+
+	public void setSortedRatingsByDoctorId(
+			Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId) {
+		this.sortedRatingsByDoctorId = sortedRatingsByDoctorId;
 	}
 
 }
