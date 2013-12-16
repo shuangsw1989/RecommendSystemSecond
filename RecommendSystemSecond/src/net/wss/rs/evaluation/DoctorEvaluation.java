@@ -65,7 +65,8 @@ public class DoctorEvaluation {
 //		System.out.println("Å·Ê½¾àÀëÏàËÆ¶È£º"+sim);
 		if(commDiseases>0){
 //			sim=1.0d - Math.tanh(sim);
-			sim=1.0/(sim+1);
+//			sim=1.0/(sim+1);
+			sim=sim;
 		}
 		
 		return sim;

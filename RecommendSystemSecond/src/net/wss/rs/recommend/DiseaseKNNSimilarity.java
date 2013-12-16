@@ -21,7 +21,7 @@ public class DiseaseKNNSimilarity {
 		this.ds = ds;
 	}
 	/**
-	 * 对一个医生所治疾病按照评分降序排列
+	 * 对一个医生所治疾病按照评分降序排列,取出前k个
 	 * 
 	 * k = 0 全部
 	 * k > 0 取前K个
@@ -82,7 +82,8 @@ public class DiseaseKNNSimilarity {
 	
 	/**
 	 * 对所有医生按照评分降序排列
-	 * @param k
+	 * 第一种方法，无返回值
+	 * @param k  取前k个
 	 * @return
 	 */
 	public void setAllRatingSort(int k){
@@ -95,7 +96,12 @@ public class DiseaseKNNSimilarity {
 		}		
 		
 	}
-	
+	/**
+	 * 对所有医生按照评分降序排列，取出前k个疾病
+	 * 第二种方法，有返回值
+	 * @param k
+	 * @return
+	 */
 	public Map<Integer, List<RatingEntity>> allRatingSort(int k){
 		Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
 		
@@ -137,6 +143,8 @@ public class DiseaseKNNSimilarity {
 		}
 		return count;
 	}
+	
+	
 	/**
 	 * 计算所有医生的相似度 不管诊次，只计算共同看的病的个数
 	 */
@@ -166,7 +174,45 @@ public class DiseaseKNNSimilarity {
 		return doctorSimilarity;
 	}
 
-	
+/**
+ * 将获得相似的矩阵，根据相似度排序，取出recommendDocNum个医生，放入sortedAllDocSim中，并给予推荐
+ * @param doctorSimilarity 医生之间的相似度矩阵
+ * @param recommendDocNum,推荐的数量
+ * @return
+ */
+	public HashMap<Integer,String> recommendSimDoc(int[][] doctorSimilarity,int recommendDocNum) {
+		HashMap<Integer,String> sortedAllDocSim = new HashMap<Integer,String>();
+		for (int i = 1; i < doctorSimilarity.length; i++) {
+			int[] doctorSim = doctorSimilarity[i];//取出一个医生与所有医生的相似度
+			// 相似度排序
+			int[] sortedDocSim = Sort.similaritySort(doctorSim);
+
+			String docSimStr = "";
+//			System.out.print("doc id:" + i + " ");
+			int count = 0;
+			int temp = 0;
+			while (count < recommendDocNum && temp < sortedDocSim.length) {
+
+				if (sortedDocSim[temp] == 0 || sortedDocSim[temp] == i || doctorSim[temp] <= 0) {//医生没有看病的情况
+					temp++;
+					continue;
+				}
+				//医生看过病，且将排序后的前recommendDocNum个，拼接成为一个字符串
+				docSimStr += sortedDocSim[temp] + ",";
+				// System.out.print(sortedDocSim[temp]+" ");
+				temp++;
+				count++;
+			}
+			if(docSimStr.length() >0){//去掉字符串最后的一个逗号
+				docSimStr = docSimStr.substring(0, docSimStr.length() - 1);
+			}
+			
+			// System.out.println();
+//			System.out.println(docSimStr);
+			sortedAllDocSim.put(i, docSimStr);//将医生id和推荐的字符串值，写入到map中
+		}
+		return sortedAllDocSim;
+	}
 	
 	
 	/**

@@ -13,22 +13,26 @@ public class TestDoctorRecommendDataset {
 	}
 	
 	public static void testDoctor(){
+//		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		System.out.println("打印出所有的医生，具体如下:");
 		ds.printAllDoctor();
 	}
 	public static void testDisease(){
+//		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		System.out.println("打印出所有疾病，具体如下:");
 		ds.printAllDisease();
 	}
 	public static void testRating(){
+//		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		System.out.println("打印出医生对疾病的平，利用逗号分割疾病的id与其评分，具体如下:");
 		ds.printAllRating();
 	}
 	
 	public static void testRatingMatrix(){
+//		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		System.out.println("打印医生对疾病的评分矩阵，具体如下:");
 		ds.printAllRatingMatrix();

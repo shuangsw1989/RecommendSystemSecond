@@ -55,7 +55,7 @@ public class DoctorRecommendDataset {
 	 */
 	public Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
 	/**
-	 * 通过医生id获得评分从大到小排序
+	 * 通过医生id获得评分，根据评分从大到小排序
 	 */
 	public Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
 	/**

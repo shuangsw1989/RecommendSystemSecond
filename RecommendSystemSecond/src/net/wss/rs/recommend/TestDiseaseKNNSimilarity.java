@@ -8,15 +8,16 @@ import net.wss.rs.data.DataSetConfig;
 import net.wss.rs.data.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.util.Sort;
 
 
 public class TestDiseaseKNNSimilarity {
 	public static void main(String[] args) {
 		
-		testSort();//对一个医生所治疾病的诊次进行排序
+//		testSort();//对一个医生所治疾病的诊次进行排序
 //		testAllSort();//对所有医生所治疾病的诊次进行排序
 //		testSim();//测试两个医生的相似度
-//		testAllSim();//测试所有医生的相似度
+		testRecommendSimDoc();//测试推荐相似医生
 	}
 	
 	public static void testSim(){
@@ -33,21 +34,24 @@ public class TestDiseaseKNNSimilarity {
 		System.out.println("doc"+d1.getId()+"与doc"+d2.getId()+"相似度："+simVal);
 	}
 	
-	public static void testAllSim(){
+	public static void testRecommendSimDoc(){
+//		推荐的相似医生数量
+		int recommendDocNum = 10;
 //		DoctorRecommendDataset ds = new DoctorRecommendDataset();
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		
 		DiseaseKNNSimilarity knn = new DiseaseKNNSimilarity(ds);
-		knn.setAllRatingSort(100);
+//		给ds中的sortedRatingsByDoctorId赋值
+		knn.setAllRatingSort(30);
 		
 		int[][] doctorSimilarity = knn.getAllSimilarityByCommonRating();
-	
-		for (int i = 0; i < doctorSimilarity.length; i++) {
-			for (int j = 0; j < doctorSimilarity[i].length; j++) {
-				System.out.print(doctorSimilarity[i][j] + " ");
-			}
-			System.out.println();
+		
+		HashMap<Integer,String> sortedAllDocSim = knn.recommendSimDoc(doctorSimilarity, recommendDocNum);
+		
+		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
+			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
+		
 	}
 	
 	
@@ -55,7 +59,7 @@ public class TestDiseaseKNNSimilarity {
 	public static void testSort(){
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		DiseaseKNNSimilarity knn = new DiseaseKNNSimilarity(ds);
-		List<RatingEntity> list = knn.ratingSortByDocId(2,2);
+		List<RatingEntity> list = knn.ratingSortByDocId(2,5);
 		for(int i=0;i<list.size();i++){
 			System.out.println("医生"+list.get(i).getDoctorId()+"对"+list.get(i).getDiseaseId()+"的诊次是："+list.get(i).getRating());
 		}
@@ -70,12 +74,12 @@ public class TestDiseaseKNNSimilarity {
 //		knn.setAllRatingSort(2);
 //		sortedRatingsByDoctorId = ds.getSortedRatingsByDoctorId();		
 		//直接获取结果
-		Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = knn.allRatingSort(2);
+		Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = knn.allRatingSort(5);
 		
 		for (Entry<Integer, List<RatingEntity>> entry: sortedRatingsByDoctorId.entrySet()) {
 			 List<RatingEntity>	sortedDocRatingList = entry.getValue();
 			 for (int i = 0; i < sortedDocRatingList.size(); i++) {						 
-				 System.out.print(sortedDocRatingList.get(i).getDiseaseId()+":"+sortedDocRatingList.get(i).getRating() + " " );	
+				 System.out.print("医生"+sortedDocRatingList.get(i).getDoctorId()+"治疗疾病"+sortedDocRatingList.get(i).getDiseaseId()+"的诊次是:"+sortedDocRatingList.get(i).getRating() + " " );	
 			 }
 			 System.out.println();	
 			 }
