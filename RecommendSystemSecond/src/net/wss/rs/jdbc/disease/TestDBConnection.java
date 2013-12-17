@@ -1,4 +1,6 @@
-package net.wss.rs.jdbc;
+package net.wss.rs.jdbc.disease;
+
+import net.wss.rs.jdbc.DBConnection;
 
 public class TestDBConnection {
 

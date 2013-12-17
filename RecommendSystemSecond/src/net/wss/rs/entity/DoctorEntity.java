@@ -4,6 +4,9 @@ public class DoctorEntity {
 private int id;
 private String name;
 private String cureDisease;//医生所治的疾病
+private String cureZheng;
+
+
 public int getId() {
 	return id;
 }
@@ -21,6 +24,13 @@ public String getCureDisease() {
 }
 public void setCureDisease(String cureDisease) {
 	this.cureDisease = cureDisease;
+}
+
+public String getCureZheng() {
+	return cureZheng;
+}
+public void setCureZheng(String cureZheng) {
+	this.cureZheng = cureZheng;
 }
 public DoctorEntity(int id, String name, String cureDisease) {
 	super();

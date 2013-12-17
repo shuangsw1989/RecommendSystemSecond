@@ -1,13 +1,13 @@
-package net.wss.rs.test;
+package net.wss.rs.test.zheng;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DataSetConfig;
-import net.wss.rs.data.DealDataSet;
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DataSetConfig;
+import net.wss.rs.data.disease.DealDataSet;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.recommend.Recommender;
-import net.wss.rs.similarity.EucliddistanceItemSimilarity;
+import net.wss.rs.similarity.disease.EucliddistanceItemSimilarity;
 
 
 public class TestEucliddistanceItemSimilarity {

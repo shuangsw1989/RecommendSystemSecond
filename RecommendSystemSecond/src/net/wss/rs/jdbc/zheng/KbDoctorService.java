@@ -1,9 +1,11 @@
-package net.wss.rs.jdbc;
+package net.wss.rs.jdbc.zheng;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import net.wss.rs.jdbc.DBConnection;
 
 public class KbDoctorService {
 	DBConnection db;
@@ -31,7 +33,7 @@ public class KbDoctorService {
 			Connection conn = db.getConn();
 			stmt = conn.createStatement();
 			// 数据库sql语句的拼接
-			String sql = "UPDATE kb_doctor set sim_doctor_disease='"+simStr+"' WHERE id ="+docid;
+			String sql = "UPDATE kb_doctor set sim_doctor_zheng='"+simStr+"' WHERE id ="+docid;
 			int rs = stmt.executeUpdate(sql);
 			
 		} catch (SQLException e) {

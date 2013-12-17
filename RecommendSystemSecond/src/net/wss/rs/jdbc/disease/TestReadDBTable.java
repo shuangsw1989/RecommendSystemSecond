@@ -1,4 +1,4 @@
-package net.wss.rs.jdbc;
+package net.wss.rs.jdbc.disease;
 
 public class TestReadDBTable {
 
@@ -9,7 +9,7 @@ public class TestReadDBTable {
 		
 		ReadDBTable rdtable= new ReadDBTable();
 		System.out.println("将数据库存到到本地的txt文件中");
-		rdtable.getDoctorData();
+		rdtable.getDoctorDiseaseData();
 
 	}
 

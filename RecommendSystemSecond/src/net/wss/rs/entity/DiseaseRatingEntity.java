@@ -1,15 +1,15 @@
 package net.wss.rs.entity;
 
-public class RatingEntity {
+public class DiseaseRatingEntity {
 
 	private int doctorId;
 	private int diseaseId;
 	private int rating;//’Ô¥Œ
 	
-	public RatingEntity() {
+	public DiseaseRatingEntity() {
 		super();
 	}
-	public RatingEntity(int doctorId, int diseaseId, int rating) {
+	public DiseaseRatingEntity(int doctorId, int diseaseId, int rating) {
 		super();
 		this.doctorId = doctorId;
 		this.diseaseId = diseaseId;

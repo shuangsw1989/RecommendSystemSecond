@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DataSetConfig;
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DataSetConfig;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.DiseaseRatingEntity;
 import net.wss.rs.util.Sort;
 
 
@@ -59,7 +59,7 @@ public class TestDiseaseKNNSimilarity {
 	public static void testSort(){
 		DoctorRecommendDataset ds = new DoctorRecommendDataset(DataSetConfig.AllDoctorPath,DataSetConfig.AllDiseasePath,DataSetConfig.AllRatingPath);
 		DiseaseKNNSimilarity knn = new DiseaseKNNSimilarity(ds);
-		List<RatingEntity> list = knn.ratingSortByDocId(2,5);
+		List<DiseaseRatingEntity> list = knn.ratingSortByDocId(2,5);
 		for(int i=0;i<list.size();i++){
 			System.out.println("医生"+list.get(i).getDoctorId()+"对"+list.get(i).getDiseaseId()+"的诊次是："+list.get(i).getRating());
 		}
@@ -74,10 +74,10 @@ public class TestDiseaseKNNSimilarity {
 //		knn.setAllRatingSort(2);
 //		sortedRatingsByDoctorId = ds.getSortedRatingsByDoctorId();		
 		//直接获取结果
-		Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = knn.allRatingSort(5);
+		Map<Integer, List<DiseaseRatingEntity>> sortedRatingsByDoctorId = knn.allRatingSort(5);
 		
-		for (Entry<Integer, List<RatingEntity>> entry: sortedRatingsByDoctorId.entrySet()) {
-			 List<RatingEntity>	sortedDocRatingList = entry.getValue();
+		for (Entry<Integer, List<DiseaseRatingEntity>> entry: sortedRatingsByDoctorId.entrySet()) {
+			 List<DiseaseRatingEntity>	sortedDocRatingList = entry.getValue();
 			 for (int i = 0; i < sortedDocRatingList.size(); i++) {						 
 				 System.out.print("医生"+sortedDocRatingList.get(i).getDoctorId()+"治疗疾病"+sortedDocRatingList.get(i).getDiseaseId()+"的诊次是:"+sortedDocRatingList.get(i).getRating() + " " );	
 			 }

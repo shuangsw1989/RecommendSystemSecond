@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map.Entry;
 
 
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.DiseaseRatingEntity;
 
 public class RecommendDoctor {
 	DoctorRecommendDataset ds;
@@ -22,9 +22,9 @@ public class RecommendDoctor {
 	public int getSimilarityByCommonRating(DoctorEntity doctor1,
 			DoctorEntity doctor2) {
 //		System.out.println(doctor1.getId());
-		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis1 = ds.getRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
-		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis2 = ds.getRatingsByDoctorId()
 				.get(doctor2.getId());
 
 		// 如果这两个疾病集合有一个为空，则说明两个医生不相似，返回0
@@ -85,9 +85,9 @@ public class RecommendDoctor {
 	 */
 	public int getSimilarityBySumCommonRating(DoctorEntity doctor1,
 			DoctorEntity doctor2) {
-		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis1 = ds.getRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
-		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis2 = ds.getRatingsByDoctorId()
 				.get(doctor2.getId());
 		
 		// 如果这两个疾病集合有一个为空，则说明两个医生不相似，返回0

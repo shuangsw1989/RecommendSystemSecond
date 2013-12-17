@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.DiseaseRatingEntity;
 import net.wss.rs.util.Sort;
 
 public class DiseaseKNNSimilarity {
@@ -29,15 +29,15 @@ public class DiseaseKNNSimilarity {
 	 * @param doctor1
 	 * @return
 	 */
-	public List<RatingEntity> ratingSortByDocId(int docId,int k){
+	public List<DiseaseRatingEntity> ratingSortByDocId(int docId,int k){
 		if(k < 0){
-			return new ArrayList<RatingEntity>();
+			return new ArrayList<DiseaseRatingEntity>();
 		}
 		
-		List<RatingEntity> docRatingList =ds.ratingsByDoctorId.get(docId);
+		List<DiseaseRatingEntity> docRatingList =ds.ratingsByDoctorId.get(docId);
 		if(docRatingList==null){
 			System.out.println("doctor:"+docId+"没有看病");
-			return new ArrayList<RatingEntity>();
+			return new ArrayList<DiseaseRatingEntity>();
 		}
 		//将doc看的病list集合转换成array
 //		RatingEntity[] docRatingArray = new  RatingEntity[docRatingList.size()];
@@ -57,7 +57,7 @@ public class DiseaseKNNSimilarity {
 		int[] docRatingIndexArray  = Sort.similaritySort(docRatingValueArray);
 		
 		//根据下标在list中找出相应的实体
-		List<RatingEntity> sortedDocRatingList =new ArrayList<RatingEntity>();
+		List<DiseaseRatingEntity> sortedDocRatingList =new ArrayList<DiseaseRatingEntity>();
 		int listLen = 0;
 		if(k > 0 && docRatingIndexArray.length > k){
 			listLen = k;
@@ -67,7 +67,7 @@ public class DiseaseKNNSimilarity {
 //		System.out.println(listLen);
 		for (int i = 0; i < listLen; i++) {
 			int docIdIndex = docRatingIndexArray[i];
-			RatingEntity sortedRating = docRatingList.get(docIdIndex);
+			DiseaseRatingEntity sortedRating = docRatingList.get(docIdIndex);
 			sortedDocRatingList.add(sortedRating);	
 		}
 		
@@ -102,8 +102,8 @@ public class DiseaseKNNSimilarity {
 	 * @param k
 	 * @return
 	 */
-	public Map<Integer, List<RatingEntity>> allRatingSort(int k){
-		Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
+	public Map<Integer, List<DiseaseRatingEntity>> allRatingSort(int k){
+		Map<Integer, List<DiseaseRatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<DiseaseRatingEntity>>();
 		
 		for (Entry<Integer, DoctorEntity> entry: ds.allDoctor.entrySet()) {
 			Integer docKey = entry.getKey();//获取一个医生的id
@@ -120,10 +120,10 @@ public class DiseaseKNNSimilarity {
 	public int getSimilarityByCommonRating(DoctorEntity doctor1,
 			DoctorEntity doctor2) {
 //		System.out.println(doctor1.getId());
-		List<RatingEntity> dis1 = ds.getSortedRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis1 = ds.getSortedRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
 				
-		List<RatingEntity> dis2 = ds.getSortedRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis2 = ds.getSortedRatingsByDoctorId()
 				.get(doctor2.getId());
 
 		// 如果这两个疾病集合有一个为空，则说明两个医生不相似，返回0

@@ -1,4 +1,4 @@
-package net.wss.rs.data;
+package net.wss.rs.data.disease;
 
 public class TestDoctorRecommendDataset {
 

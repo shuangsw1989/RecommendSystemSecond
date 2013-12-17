@@ -1,30 +1,26 @@
-package net.wss.rs.similarity;
+package net.wss.rs.similarity.zheng;
 
-import java.io.File;
+
 import java.util.List;
 import java.util.Map.Entry;
-
-import net.wss.rs.data.DataSetConfig;
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.zheng.ZhengDoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.ZhengRatingEntity;
 import net.wss.rs.util.FileUtil;
 
-public class EucliddistanceItemSimilarity {
-
+public class JacobiItemSimilarity {
 	/**
 	 * 计算两个用户的相似度
-	 * 计算的方法是欧式距离的方法
+	 * 计算方法是雅克比距离
 	 * @param doctor1
 	 * @param doctor2
 	 * @return
 	 */
-	
-	public double getSimilarityByEucliddistance(DoctorRecommendDataset ds,DoctorEntity doctor1,
+	public double getSimilarityByJacobi(ZhengDoctorRecommendDataset ds ,DoctorEntity doctor1,
 			DoctorEntity doctor2) {
-		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
+		List<ZhengRatingEntity> dis1 = ds.getRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
-		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
+		List<ZhengRatingEntity> dis2 = ds.getRatingsByDoctorId()
 				.get(doctor2.getId());
 		
 		int commDiseases=0;
@@ -32,49 +28,29 @@ public class EucliddistanceItemSimilarity {
 //			System.err.println("医生没有治过病");
 			return 0;
 		}
-		
-		
-//		for (int i = 0; i < dis1.size(); i++) {
-//			System.out.print(dis1.get(i).getDiseaseId()+":"+dis1.get(i).getRating()+" ");			
-//		}
-//		System.out.println();
-//		for (int i = 0; i < dis2.size(); i++) {
-//			System.out.print(dis2.get(i).getDiseaseId()+":"+dis2.get(i).getRating()+" ");			
-//		}
-//		System.out.println();
-//		
-
 		// 判断两个疾病集合是否有交集
-		double sim=0.0;
-		
+		double sim=0.0d;
 		for (int i = 0; i < dis1.size(); i++) {
 			for (int j = 0; j < dis2.size(); j++) {
-				if (dis1.get(i).getDiseaseId() == dis2.get(j).getDiseaseId()) {
+				if (dis1.get(i).getZhengId() == dis2.get(j).getZhengId()) {
 					commDiseases++;
-					int dis1Rating = dis1.get(i).getRating();
-					int dis2Rating = dis2.get(j).getRating();
-//					System.out.println("common dis id:"+dis1.get(i).getDiseaseId()+" "+dis1Rating+" "+dis2Rating);
-					sim += Math.pow((dis1Rating-dis2Rating),2);
 				}
 			}
 		}
-//		System.out.println("欧式距离相似度："+sim);
-		if(commDiseases>0){
-//			sim=1.0d - Math.tanh(sim);
-//			sim=1.0/(sim+1);
-			sim=sim;
-		}
-		
+//		System.out.println("两个医生治疗相同疾病的个数："+commDiseases);
+//		System.out.println("第一个医生所治疾病的个数："+dis1.size());	
+//		System.out.println("第二个医生所治疾病的个数："+dis2.size());
+		sim = commDiseases*1.0/(dis1.size()+dis2.size()-commDiseases);
+//		System.out.println("雅克比相似度："+String.format("%.5f",sim));	
 		return sim;
 	}
+	
 	/**
 	 * 计算所有医生的相似度
-	 * 
-	 * 欧式距离
-	 *
+	 * 雅克比
 	 */
 	
-	public double[][] getAllDoctorSimilarity(DoctorRecommendDataset ds) {
+	public double[][] getAllDoctorSimilarity(ZhengDoctorRecommendDataset ds) {
 		int allDoctorSize=ds.getAllDoctor().size();
 //		System.out.println("allDoctorSize"+allDoctorSize);
 		
@@ -93,14 +69,13 @@ public class EucliddistanceItemSimilarity {
 //				System.out.println(doc1.getId());
 //				System.out.println(doc2.getId());
 				double count=0;
-			
-					count = getSimilarityByEucliddistance(ds,doc1, doc2);// 找出相似的个数
+					count = getSimilarityByJacobi(ds,doc1, doc2);// 找出相似的个数
 					doctorSimilarity[i][j] = count;
 					doctorSimilarity[j][i] = count;// 因为是个对称的
 				
 			}
 		}
-		
+//		写入文件
 //		File file = new File(DataSetConfig.SimiResultPath);
 //		if (file.exists()) {		
 //			file.delete();
@@ -118,5 +93,4 @@ public class EucliddistanceItemSimilarity {
 	
 		return doctorSimilarity;
 	}
-	
 }

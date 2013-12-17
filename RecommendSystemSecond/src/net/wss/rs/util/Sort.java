@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.DiseaseRatingEntity;
 
 
 public class Sort {

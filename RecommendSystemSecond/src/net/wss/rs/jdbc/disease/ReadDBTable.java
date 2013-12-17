@@ -1,4 +1,4 @@
-package net.wss.rs.jdbc;
+package net.wss.rs.jdbc.disease;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,7 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import net.wss.rs.data.DataSetConfig;
+import net.wss.rs.data.disease.DataSetConfig;
+import net.wss.rs.jdbc.DBConnection;
 import net.wss.rs.util.FileUtil;
 
 
@@ -28,8 +29,10 @@ public class ReadDBTable {
 	Statement stmt = null;
 	Connection conn=null;
 	
-	
-	public void getDoctorData() {
+	/**
+	 * 获取医生表当中的医生所治中医的疾病
+	 */
+	public void getDoctorDiseaseData() {
 		
 		try {
 			// 数据库连接的获取
@@ -63,6 +66,6 @@ public class ReadDBTable {
 
 	}
 	
-
+	
 }
 

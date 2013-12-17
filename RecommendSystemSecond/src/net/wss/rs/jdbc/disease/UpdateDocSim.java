@@ -1,10 +1,10 @@
-package net.wss.rs.jdbc;
+package net.wss.rs.jdbc.disease;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DataSetConfig;
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DataSetConfig;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.recommend.DiseaseKNNSimilarity;
 
 public class UpdateDocSim {
@@ -28,8 +28,8 @@ public class UpdateDocSim {
 		HashMap<Integer,String> sortedAllDocSim = knn.recommendSimDoc(doctorSimilarity, recommendDocNum);
 		KbDoctorService kbservice = new KbDoctorService();
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
-			kbservice.updateDocSim(entry.getKey(), entry.getValue());
-//			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
+//			kbservice.updateDocSim(entry.getKey(), entry.getValue());
+			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
 	}
 

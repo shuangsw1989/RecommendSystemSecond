@@ -1,4 +1,4 @@
-package net.wss.rs.data;
+package net.wss.rs.data.zheng;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,16 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
-import net.wss.rs.entity.DiseaseEntity;
+import net.wss.rs.entity.ZhengEntity;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
-import net.wss.rs.jdbc.ReadDBTable;
-import net.wss.rs.util.StringUtil;
+import net.wss.rs.entity.ZhengRatingEntity;
 
-public class DoctorRecommendDataset {
 
+public class ZhengDoctorRecommendDataset {
+	//测试数据的存放路径
 	public static String REDOCDISPATH = "data/redocdiscount.txt";
 	public static String DOCTORPATH = "data/doctor.txt";
 	public static String DISEASEPATH = "data/disease.txt";
@@ -32,7 +30,7 @@ public class DoctorRecommendDataset {
 	/**
 	 * 所有疾病的诊次
 	 */
-	public List<RatingEntity> allRating = new ArrayList<RatingEntity>();
+	public List<ZhengRatingEntity> allRating = new ArrayList<ZhengRatingEntity>();
 
 	/**
 	 * 得到所有的医生.
@@ -42,26 +40,26 @@ public class DoctorRecommendDataset {
 	/**
 	 * 得到所有的疾病
 	 */
-	public Map<Integer, DiseaseEntity> allDisease = new HashMap<Integer, DiseaseEntity>();
+	public Map<Integer, ZhengEntity> allZheng = new HashMap<Integer, ZhengEntity>();
 
 	/**
 	 * 通过疾病的id得到所有疾病的诊次
 	 * 
 	 */
-	public Map<Integer, List<RatingEntity>> ratingsByDiseaseId = new HashMap<Integer, List<RatingEntity>>();
+	public Map<Integer, List<ZhengRatingEntity>> ratingsByZhengId = new HashMap<Integer, List<ZhengRatingEntity>>();
 
 	/**
 	 * 通过医生的id得到所有疾病的诊次
 	 */
-	public Map<Integer, List<RatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
+	public Map<Integer, List<ZhengRatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<ZhengRatingEntity>>();
 	/**
 	 * 通过医生id获得评分，根据评分从大到小排序
 	 */
-	public Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
+	public Map<Integer, List<ZhengRatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<ZhengRatingEntity>>();
 	/**
 	 * 测试数据源
 	 */
-	public DoctorRecommendDataset() {
+	public ZhengDoctorRecommendDataset() {
 		this.docPath=DOCTORPATH;
 		this.disPath = DISEASEPATH;
 		this.ratingPath = REDOCDISPATH;
@@ -78,7 +76,7 @@ public class DoctorRecommendDataset {
 	 * @param disPath
 	 * @param ratingPath
 	 */
-	public DoctorRecommendDataset(String docPath,String disPath,String ratingPath) {
+	public ZhengDoctorRecommendDataset(String docPath,String disPath,String ratingPath) {
 		this.docPath=docPath;
 		this.disPath = disPath;
 		this.ratingPath = ratingPath;
@@ -161,11 +159,11 @@ public class DoctorRecommendDataset {
 
 					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
 
-					DiseaseEntity diseaseEntity = new DiseaseEntity();// 实例化一个医生实体
-					diseaseEntity.setId(Integer.parseInt(array[0]));
+					ZhengEntity zhengEntity = new ZhengEntity();// 实例化一个医生实体
+					zhengEntity.setId(Integer.parseInt(array[0]));
 
-					diseaseEntity.setId(Integer.valueOf(array[0]));// 设置医生的id为分割字符串后得到数组的第一列
-					allDisease.put(diseaseEntity.getId(), diseaseEntity);// 将这个实体添加到一个专家集合
+					zhengEntity.setId(Integer.valueOf(array[0]));// 设置医生的id为分割字符串后得到数组的第一列
+					allZheng.put(zhengEntity.getId(), zhengEntity);// 将这个实体添加到一个专家集合
 					// System.out.println(doctorEntity.getId());
 
 				}
@@ -208,9 +206,9 @@ public class DoctorRecommendDataset {
 
 					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
 					int docId = Integer.parseInt(array[0]);
-					int disId = Integer.parseInt(array[1]);
+					int zhengId = Integer.parseInt(array[1]);
 					int rating = Integer.parseInt(array[2]);
-					allRating.add(new RatingEntity(docId, disId, rating));
+					allRating.add(new ZhengRatingEntity(docId, zhengId, rating));
 				}
 				read.close();
 
@@ -224,8 +222,8 @@ public class DoctorRecommendDataset {
 		}
 
 		/* build maps that provide access to ratings by userId or itemId */
-		for (RatingEntity rating : allRating) {
-			addRatingToMap(ratingsByDiseaseId, rating.getDiseaseId(), rating);
+		for (ZhengRatingEntity rating : allRating) {
+			addRatingToMap(ratingsByZhengId, rating.getZhengId(), rating);
 			addRatingToMap(ratingsByDoctorId, rating.getDoctorId(), rating);
 		}
 
@@ -234,11 +232,11 @@ public class DoctorRecommendDataset {
 	/**
 	 * 将诊次添加到map集合中
 	 */
-	public void addRatingToMap(Map<Integer, List<RatingEntity>> map,
-			Integer key, RatingEntity rating) {
-		List<RatingEntity> ratingsForKey = map.get(key);
+	public void addRatingToMap(Map<Integer, List<ZhengRatingEntity>> map,
+			Integer key, ZhengRatingEntity rating) {
+		List<ZhengRatingEntity> ratingsForKey = map.get(key);
 		if (ratingsForKey == null) {
-			ratingsForKey = new ArrayList<RatingEntity>();
+			ratingsForKey = new ArrayList<ZhengRatingEntity>();
 			map.put(key, ratingsForKey);
 		}
 		ratingsForKey.add(rating);
@@ -261,13 +259,13 @@ public class DoctorRecommendDataset {
 	/**
 	 * 打印所有疾病key-value，key,value是疾病的id
 	 */
-	public void printAllDisease() {
+	public void printAllZheng() {
 
-		for (Entry<Integer, DiseaseEntity> entry : allDisease.entrySet()) {
-			Integer disKey = entry.getKey();
-			DiseaseEntity value = entry.getValue();
+		for (Entry<Integer, ZhengEntity> entry : allZheng.entrySet()) {
+			Integer zhengKey = entry.getKey();
+			ZhengEntity value = entry.getValue();
 
-			System.out.println("dis id:" + value.getId());
+			System.out.println("zheng id:" + value.getId());
 		}
 	}
 
@@ -279,13 +277,13 @@ public class DoctorRecommendDataset {
 		for (Entry<Integer, DoctorEntity> entry : allDoctor.entrySet()) {
 			Integer docKey = entry.getKey();
 			System.out.print("doc id:" + docKey + "  ");
-			List<RatingEntity> docRatingList = ratingsByDoctorId.get(docKey);
+			List<ZhengRatingEntity> docRatingList = ratingsByDoctorId.get(docKey);
 			if (docRatingList == null) {
 				System.out.println();
 				continue;
 			}
-			for (RatingEntity rating : docRatingList) {
-				System.out.print(rating.getDiseaseId() + ","
+			for (ZhengRatingEntity rating : docRatingList) {
+				System.out.print(rating.getZhengId() + ","
 						+ rating.getRating() + "  ");
 			}
 			System.out.println();
@@ -313,24 +311,24 @@ public class DoctorRecommendDataset {
 	 * 打印医生对疾病的评分
 	 */
 	public void printAllRatingMatrix() {
-		int[][] ratingMatrix = new int[allDoctor.size()][allDisease.size()];
+		int[][] ratingMatrix = new int[allDoctor.size()][allZheng.size()];
 		for (Entry<Integer, DoctorEntity> doctorEntry : allDoctor.entrySet()) {
-			for (Entry<Integer, DiseaseEntity> entry1 : allDisease.entrySet()) {
+			for (Entry<Integer, ZhengEntity> entry1 : allZheng.entrySet()) {
 				Integer docKey = doctorEntry.getKey();
 				// System.out.print( "doc id:"+key+"  ");
 				// List<RatingEntity> docRatingList =
 				// ratingsByDoctorId.get(key);
 				Integer disKey = entry1.getKey();
 				// System.out.print( "dis id:"+key1+"  ");
-				List<RatingEntity> disRatingList = ratingsByDoctorId
+				List<ZhengRatingEntity> disRatingList = ratingsByDoctorId
 						.get(docKey);
 				if (disRatingList == null) {
 					System.out.print(0 + " ");
 					continue;
 				}
 				int r = 0;
-				for (RatingEntity rating : disRatingList) {
-					if (rating.getDiseaseId() == disKey) {
+				for (ZhengRatingEntity rating : disRatingList) {
+					if (rating.getZhengId() == disKey) {
 						r = rating.getRating();
 					}
 				}
@@ -354,11 +352,11 @@ public class DoctorRecommendDataset {
 		return array;
 	}
 
-	public List<RatingEntity> getAllRating() {
+	public List<ZhengRatingEntity> getAllRating() {
 		return allRating;
 	}
 
-	public void setAllRating(List<RatingEntity> allRating) {
+	public void setAllRating(List<ZhengRatingEntity> allRating) {
 		this.allRating = allRating;
 	}
 
@@ -370,38 +368,38 @@ public class DoctorRecommendDataset {
 		this.allDoctor = allDoctor;
 	}
 
-	public Map<Integer, DiseaseEntity> getAllDisease() {
-		return allDisease;
+	public Map<Integer, ZhengEntity> getAllDisease() {
+		return allZheng;
 	}
 
-	public void setAllDisease(Map<Integer, DiseaseEntity> allDisease) {
-		this.allDisease = allDisease;
+	public void setAllDisease(Map<Integer, ZhengEntity> allZheng) {
+		this.allZheng = allZheng;
 	}
 
-	public Map<Integer, List<RatingEntity>> getRatingsByDiseaseId() {
-		return ratingsByDiseaseId;
+	public Map<Integer, List<ZhengRatingEntity>> getRatingsByDiseaseId() {
+		return ratingsByZhengId;
 	}
 
 	public void setRatingsByDiseaseId(
-			Map<Integer, List<RatingEntity>> ratingsByDiseaseId) {
-		this.ratingsByDiseaseId = ratingsByDiseaseId;
+			Map<Integer, List<ZhengRatingEntity>> ratingsByZhengId) {
+		this.ratingsByZhengId = ratingsByZhengId;
 	}
 
-	public Map<Integer, List<RatingEntity>> getRatingsByDoctorId() {
+	public Map<Integer, List<ZhengRatingEntity>> getRatingsByDoctorId() {
 		return ratingsByDoctorId;
 	}
 
 	public void setRatingsByDoctorId(
-			Map<Integer, List<RatingEntity>> ratingsByDoctorId) {
+			Map<Integer, List<ZhengRatingEntity>> ratingsByDoctorId) {
 		this.ratingsByDoctorId = ratingsByDoctorId;
 	}
 
-	public Map<Integer, List<RatingEntity>> getSortedRatingsByDoctorId() {
+	public Map<Integer, List<ZhengRatingEntity>> getSortedRatingsByDoctorId() {
 		return sortedRatingsByDoctorId;
 	}
 
 	public void setSortedRatingsByDoctorId(
-			Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId) {
+			Map<Integer, List<ZhengRatingEntity>> sortedRatingsByDoctorId) {
 		this.sortedRatingsByDoctorId = sortedRatingsByDoctorId;
 	}
 

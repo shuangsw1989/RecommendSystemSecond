@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DataSetConfig;
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DataSetConfig;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.DiseaseRatingEntity;
 import net.wss.rs.util.FileUtil;
 
 public class DoctorEvaluation {
@@ -26,9 +26,9 @@ public class DoctorEvaluation {
 	
 	public double getSimilarityByEucliddistance(DoctorEntity doctor1,
 			DoctorEntity doctor2) {
-		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis1 = ds.getRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
-		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis2 = ds.getRatingsByDoctorId()
 				.get(doctor2.getId());
 		
 		int commDiseases=0;
@@ -135,9 +135,9 @@ public class DoctorEvaluation {
 	 */
 	public double getSimilarityByJacobi(DoctorEntity doctor1,
 			DoctorEntity doctor2) {
-		List<RatingEntity> dis1 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis1 = ds.getRatingsByDoctorId()
 				.get(doctor1.getId());// 获取某一个医生所包含的疾病
-		List<RatingEntity> dis2 = ds.getRatingsByDoctorId()
+		List<DiseaseRatingEntity> dis2 = ds.getRatingsByDoctorId()
 				.get(doctor2.getId());
 		
 		int commDiseases=0;

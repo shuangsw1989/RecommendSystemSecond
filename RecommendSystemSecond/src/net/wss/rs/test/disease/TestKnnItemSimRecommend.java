@@ -1,15 +1,15 @@
-package net.wss.rs.test;
+package net.wss.rs.test.disease;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import net.wss.rs.data.DataSetConfig;
-import net.wss.rs.data.DealDataSet;
-import net.wss.rs.data.DoctorRecommendDataset;
+import net.wss.rs.data.disease.DataSetConfig;
+import net.wss.rs.data.disease.DealDataSet;
+import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.recommend.Recommender;
-import net.wss.rs.similarity.JacobiItemSimilarity;
+import net.wss.rs.similarity.disease.KnnItemSimilarity;
 
-public class TestJacobiItemSimilarity {
+public class TestKnnItemSimRecommend {
 
 	/**
 	 * @param args
@@ -27,8 +27,8 @@ public class TestJacobiItemSimilarity {
 		dds.setAllRatingSort(diseaseCalCount);
 		
 //		计算doc-doc相似矩阵
-		JacobiItemSimilarity jacobisim = new JacobiItemSimilarity();
-		double[][] doctorSimilarity = jacobisim.getAllDoctorSimilarity(ds);
+		KnnItemSimilarity knnsim = new KnnItemSimilarity();
+		int[][] doctorSimilarity = knnsim.getAllSimilarityByCommonRating(ds);
 		
 //		根据相似度推荐
 		Recommender recom = new Recommender();
@@ -37,7 +37,6 @@ public class TestJacobiItemSimilarity {
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
 			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
-
 	}
 
 }

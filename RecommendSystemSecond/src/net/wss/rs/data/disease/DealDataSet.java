@@ -1,4 +1,4 @@
-package net.wss.rs.data;
+package net.wss.rs.data.disease;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.wss.rs.entity.DoctorEntity;
-import net.wss.rs.entity.RatingEntity;
+import net.wss.rs.entity.DiseaseRatingEntity;
 import net.wss.rs.util.Sort;
 
 public class DealDataSet {
@@ -31,15 +31,15 @@ public class DealDataSet {
 	 * @param doctor1
 	 * @return
 	 */
-	public List<RatingEntity> ratingSortByDocId(int docId,int k){
+	public List<DiseaseRatingEntity> ratingSortByDocId(int docId,int k){
 		if(k < 0){
-			return new ArrayList<RatingEntity>();
+			return new ArrayList<DiseaseRatingEntity>();
 		}
 		
-		List<RatingEntity> docRatingList =ds.ratingsByDoctorId.get(docId);
+		List<DiseaseRatingEntity> docRatingList =ds.ratingsByDoctorId.get(docId);
 		if(docRatingList==null){
 			System.out.println("doctor:"+docId+"没有看病");
-			return new ArrayList<RatingEntity>();
+			return new ArrayList<DiseaseRatingEntity>();
 		}
 		//将doc看的病list集合转换成array
 //		RatingEntity[] docRatingArray = new  RatingEntity[docRatingList.size()];
@@ -59,7 +59,7 @@ public class DealDataSet {
 		int[] docRatingIndexArray  = Sort.similaritySort(docRatingValueArray);
 		
 		//根据下标在list中找出相应的实体
-		List<RatingEntity> sortedDocRatingList =new ArrayList<RatingEntity>();
+		List<DiseaseRatingEntity> sortedDocRatingList =new ArrayList<DiseaseRatingEntity>();
 		int listLen = 0;
 		if(k > 0 && docRatingIndexArray.length > k){
 			listLen = k;
@@ -69,7 +69,7 @@ public class DealDataSet {
 //		System.out.println(listLen);
 		for (int i = 0; i < listLen; i++) {
 			int docIdIndex = docRatingIndexArray[i];
-			RatingEntity sortedRating = docRatingList.get(docIdIndex);
+			DiseaseRatingEntity sortedRating = docRatingList.get(docIdIndex);
 			sortedDocRatingList.add(sortedRating);	
 		}
 		
@@ -104,8 +104,8 @@ public class DealDataSet {
 	 * @param k
 	 * @return
 	 */
-	public Map<Integer, List<RatingEntity>> allRatingSort(int k){
-		Map<Integer, List<RatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<RatingEntity>>();
+	public Map<Integer, List<DiseaseRatingEntity>> allRatingSort(int k){
+		Map<Integer, List<DiseaseRatingEntity>> sortedRatingsByDoctorId = new HashMap<Integer, List<DiseaseRatingEntity>>();
 		
 		for (Entry<Integer, DoctorEntity> entry: ds.allDoctor.entrySet()) {
 			Integer docKey = entry.getKey();//获取一个医生的id
