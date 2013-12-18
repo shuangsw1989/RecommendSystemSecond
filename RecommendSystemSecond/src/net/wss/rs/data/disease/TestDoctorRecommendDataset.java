@@ -6,9 +6,9 @@ public class TestDoctorRecommendDataset {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		testDoctor();//测试获取的所有医生
-		testDisease();//测试获取的所有疾病
-		testRating();//测试获取所有的评分
+//		testDoctor();//测试获取的所有医生
+//		testDisease();//测试获取的所有疾病
+//		testRating();//测试获取所有的评分
 		testRatingMatrix();//测试所有用户的评分矩阵
 	}
 	

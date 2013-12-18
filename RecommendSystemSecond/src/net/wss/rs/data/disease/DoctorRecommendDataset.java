@@ -162,9 +162,8 @@ public class DoctorRecommendDataset {
 					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
 
 					DiseaseEntity diseaseEntity = new DiseaseEntity();// 实例化一个医生实体
-					diseaseEntity.setId(Integer.parseInt(array[0]));
-
 					diseaseEntity.setId(Integer.valueOf(array[0]));// 设置医生的id为分割字符串后得到数组的第一列
+					diseaseEntity.setName(array[1]);
 					allDisease.put(diseaseEntity.getId(), diseaseEntity);// 将这个实体添加到一个专家集合
 					// System.out.println(doctorEntity.getId());
 
@@ -207,10 +206,14 @@ public class DoctorRecommendDataset {
 					}
 
 					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
-					int docId = Integer.parseInt(array[0]);
-					int disId = Integer.parseInt(array[1]);
-					int rating = Integer.parseInt(array[2]);
-					allRating.add(new DiseaseRatingEntity(docId, disId, rating));
+//					System.out.println(lineTxt);
+					if(array.length==3 && array[0].length()>0&&array[1].length()>0&&array[2].length()>0){
+						int docId = Integer.parseInt(array[0]);
+						int disId = Integer.parseInt(array[1]);
+						int rating = Integer.parseInt(array[2]);
+						allRating.add(new DiseaseRatingEntity(docId, disId, rating));
+					}
+					
 				}
 				read.close();
 
@@ -267,7 +270,7 @@ public class DoctorRecommendDataset {
 			Integer disKey = entry.getKey();
 			DiseaseEntity value = entry.getValue();
 
-			System.out.println("dis id:" + value.getId());
+			System.out.println("dis id:" + value.getId()+" dis name:" + value.getName());
 		}
 	}
 

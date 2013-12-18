@@ -47,8 +47,8 @@ public class ZhengReadDBTable {
 //				FileUtil.appendData("d:\\disease.txt",cure_china_disease);
 				
 				//将获得一行的数据拼凑以分号相隔一个字符串，然后写到txt文件中
-				String line1 = id+";"+name+";"+cure_china_zheng;
-				FileUtil.appendData(ZhengDataSetConfig.AllDataPath, line1);
+//				String line1 = id+";"+name+";"+cure_china_zheng;
+//				FileUtil.appendData(ZhengDataSetConfig.AllDataPath, line1);
 //				System.out.println(id+";"+name+";"+cure_china_disease);
 				
 			}

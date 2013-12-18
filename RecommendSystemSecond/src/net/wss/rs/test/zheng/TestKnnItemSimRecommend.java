@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import net.wss.rs.data.zheng.ZhengDataSetConfig;
 import net.wss.rs.data.zheng.ZhengDealDataSet;
 import net.wss.rs.data.zheng.ZhengDoctorRecommendDataset;
-import net.wss.rs.recommend.Recommender;
+import net.wss.rs.recommend.ZhengRecommend;
 import net.wss.rs.similarity.zheng.KnnItemSimilarity;
 
 public class TestKnnItemSimRecommend {
@@ -16,7 +16,7 @@ public class TestKnnItemSimRecommend {
 	 */
 	public static void main(String[] args) {
 //		计算关系矩阵的疾病数量
-		int zhengCalCount = 30;
+		int zhengCalCount = 12;
 //		推荐的相似医生数量
 		int recommendDocNum = 10;
 //		ZhengDoctorRecommendDataset ds = new ZhengDoctorRecommendDataset();
@@ -31,7 +31,7 @@ public class TestKnnItemSimRecommend {
 		int[][] doctorSimilarity = knnsim.getAllSimilarityByCommonRating(ds);
 		
 //		根据相似度推荐
-		Recommender recom = new Recommender();
+		ZhengRecommend recom = new ZhengRecommend();
 		HashMap<Integer,String> sortedAllDocSim = recom.recommendSimDoc(doctorSimilarity, recommendDocNum);
 		
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {

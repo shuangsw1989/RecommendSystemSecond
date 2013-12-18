@@ -29,7 +29,7 @@ public class UpdateDocSim {
 		KbDoctorService kbservice = new KbDoctorService();
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
 //			kbservice.updateDocSim(entry.getKey(), entry.getValue());
-			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
+//			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
 	}
 

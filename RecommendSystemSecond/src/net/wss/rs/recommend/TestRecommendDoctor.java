@@ -8,8 +8,8 @@ import net.wss.rs.util.Sort;
 public class TestRecommendDoctor {
 	public static void main(String[] args) {
 		testTwoDoctorSimi();//两个用户的相似，与诊次无关
-		testTwoDoctorRatingSimi();//两个用户的相似，与诊次有关
-		testAllDoctorSimi();//所有用户相似，与诊次相关或不想关，用type来控制
+//		testTwoDoctorRatingSimi();//两个用户的相似，与诊次有关
+//		testAllDoctorSimi();//所有用户相似，与诊次相关或不想关，用type来控制
 	}
 	
 	
@@ -18,9 +18,9 @@ public class TestRecommendDoctor {
 		RecommendDoctor re =new RecommendDoctor(ds);
 	
 		DoctorEntity d1 = new DoctorEntity();
-		d1.setId(1);
+		d1.setId(2);
 		DoctorEntity d2 = new DoctorEntity();
-		d2.setId(2);
+		d2.setId(3);
 		
 		int count = re.getSimilarityByCommonRating(d1, d2);
 		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count);
@@ -30,9 +30,9 @@ public class TestRecommendDoctor {
 		RecommendDoctor re =new RecommendDoctor(ds);
 	
 		DoctorEntity d1 = new DoctorEntity();
-		d1.setId(1);
+		d1.setId(2);
 		DoctorEntity d2 = new DoctorEntity();
-		d2.setId(2);
+		d2.setId(3);
 		
 		int count1 = re.getSimilarityBySumCommonRating(d1, d2);
 		System.out.println("医生"+d1.getId()+"与医生"+d2.getId()+"相似度"+count1);

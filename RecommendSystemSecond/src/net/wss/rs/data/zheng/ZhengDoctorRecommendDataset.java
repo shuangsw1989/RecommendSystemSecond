@@ -25,10 +25,10 @@ public class ZhengDoctorRecommendDataset {
 	public static String DISEASEPATH = "data/disease.txt";
 
 	String docPath;
-	String disPath;
+	String zhengPath;
 	String ratingPath;
 	/**
-	 * 所有疾病的诊次
+	 * 所有症状的诊次
 	 */
 	public List<ZhengRatingEntity> allRating = new ArrayList<ZhengRatingEntity>();
 
@@ -38,18 +38,18 @@ public class ZhengDoctorRecommendDataset {
 	public Map<Integer, DoctorEntity> allDoctor = new HashMap<Integer, DoctorEntity>();
 
 	/**
-	 * 得到所有的疾病
+	 * 得到所有的症状
 	 */
 	public Map<Integer, ZhengEntity> allZheng = new HashMap<Integer, ZhengEntity>();
 
 	/**
-	 * 通过疾病的id得到所有疾病的诊次
+	 * 通过症状的id得到所有症状的诊次
 	 * 
 	 */
 	public Map<Integer, List<ZhengRatingEntity>> ratingsByZhengId = new HashMap<Integer, List<ZhengRatingEntity>>();
 
 	/**
-	 * 通过医生的id得到所有疾病的诊次
+	 * 通过医生的id得到所有症状的诊次
 	 */
 	public Map<Integer, List<ZhengRatingEntity>> ratingsByDoctorId = new HashMap<Integer, List<ZhengRatingEntity>>();
 	/**
@@ -59,29 +59,29 @@ public class ZhengDoctorRecommendDataset {
 	/**
 	 * 测试数据源
 	 */
-	public ZhengDoctorRecommendDataset() {
-		this.docPath=DOCTORPATH;
-		this.disPath = DISEASEPATH;
-		this.ratingPath = REDOCDISPATH;
-		
-		readDoctorTxtFile(DOCTORPATH);
-		readDiseaseTxtFile(DISEASEPATH);
-		loadRatings(REDOCDISPATH);
-
-	}
+//	public ZhengDoctorRecommendDataset() {
+//		this.docPath=DOCTORPATH;
+//		this.zhengPath = ZHENGPATH;
+//		this.ratingPath = REDOCDISPATH;
+//		
+//		readDoctorTxtFile(DOCTORPATH);
+//		readDiseaseTxtFile(ZHENGPATH);
+//		loadRatings(REDOCDISPATH);
+//
+//	}
 	
 	/**
 	 * 数据库数据
 	 * @param docPath
-	 * @param disPath
+	 * @param zhengPath
 	 * @param ratingPath
 	 */
-	public ZhengDoctorRecommendDataset(String docPath,String disPath,String ratingPath) {
+	public ZhengDoctorRecommendDataset(String docPath,String zhengPath,String ratingPath) {
 		this.docPath=docPath;
-		this.disPath = disPath;
+		this.zhengPath=zhengPath;
 		this.ratingPath = ratingPath;
 		readDoctorTxtFile(docPath);
-		readDiseaseTxtFile(disPath);
+		readZhengTxtFile(zhengPath);
 		loadRatings(ratingPath);
 
 	}
@@ -138,9 +138,9 @@ public class ZhengDoctorRecommendDataset {
 	}
 
 	/**
-	 * 读diseaseall数据集，获取有多少种病
+	 * 读zhengall数据集，获取有多少种病
 	 */
-	public void readDiseaseTxtFile(String filePath) {
+	public void readZhengTxtFile(String filePath) {
 
 		File file = new File(filePath);
 
@@ -160,9 +160,8 @@ public class ZhengDoctorRecommendDataset {
 					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
 
 					ZhengEntity zhengEntity = new ZhengEntity();// 实例化一个医生实体
-					zhengEntity.setId(Integer.parseInt(array[0]));
-
 					zhengEntity.setId(Integer.valueOf(array[0]));// 设置医生的id为分割字符串后得到数组的第一列
+					zhengEntity.setName(array[1]);
 					allZheng.put(zhengEntity.getId(), zhengEntity);// 将这个实体添加到一个专家集合
 					// System.out.println(doctorEntity.getId());
 
@@ -205,10 +204,12 @@ public class ZhengDoctorRecommendDataset {
 					}
 
 					String[] array = split(lineTxt);// 将读取得字符串分割，放入一个数组中
-					int docId = Integer.parseInt(array[0]);
-					int zhengId = Integer.parseInt(array[1]);
-					int rating = Integer.parseInt(array[2]);
-					allRating.add(new ZhengRatingEntity(docId, zhengId, rating));
+					if(array.length==3&&array[0].length()>0&&array[1].length()>0&&array[2].length()>0){
+						int docId = Integer.parseInt(array[0]);
+						int zhengId = Integer.parseInt(array[1]);
+						int rating = Integer.parseInt(array[2]);
+						allRating.add(new ZhengRatingEntity(docId, zhengId, rating));
+					}
 				}
 				read.close();
 
@@ -257,7 +258,7 @@ public class ZhengDoctorRecommendDataset {
 	}
 
 	/**
-	 * 打印所有疾病key-value，key,value是疾病的id
+	 * 打印所有症状key-value，key,value是症状的id
 	 */
 	public void printAllZheng() {
 
@@ -265,12 +266,13 @@ public class ZhengDoctorRecommendDataset {
 			Integer zhengKey = entry.getKey();
 			ZhengEntity value = entry.getValue();
 
-			System.out.println("zheng id:" + value.getId());
+			System.out.println("zheng id:" + value.getId()+ "  zheng name:"
+					+ value.getName());
 		}
 	}
 
 	/**
-	 * 打印所有诊次key-value，key,value是疾病的id
+	 * 打印所有诊次key-value，key,value是症状的id
 	 */
 	public void printAllRating() {
 
@@ -308,7 +310,7 @@ public class ZhengDoctorRecommendDataset {
 	}
 
 	/**
-	 * 打印医生对疾病的评分
+	 * 打印医生对症状的评分
 	 */
 	public void printAllRatingMatrix() {
 		int[][] ratingMatrix = new int[allDoctor.size()][allZheng.size()];
@@ -318,17 +320,17 @@ public class ZhengDoctorRecommendDataset {
 				// System.out.print( "doc id:"+key+"  ");
 				// List<RatingEntity> docRatingList =
 				// ratingsByDoctorId.get(key);
-				Integer disKey = entry1.getKey();
-				// System.out.print( "dis id:"+key1+"  ");
-				List<ZhengRatingEntity> disRatingList = ratingsByDoctorId
+				Integer zhengKey = entry1.getKey();
+				// System.out.print( "zheng id:"+key1+"  ");
+				List<ZhengRatingEntity> zhengRatingList = ratingsByDoctorId
 						.get(docKey);
-				if (disRatingList == null) {
+				if (zhengRatingList == null) {
 					System.out.print(0 + " ");
 					continue;
 				}
 				int r = 0;
-				for (ZhengRatingEntity rating : disRatingList) {
-					if (rating.getZhengId() == disKey) {
+				for (ZhengRatingEntity rating : zhengRatingList) {
+					if (rating.getZhengId() == zhengKey) {
 						r = rating.getRating();
 					}
 				}

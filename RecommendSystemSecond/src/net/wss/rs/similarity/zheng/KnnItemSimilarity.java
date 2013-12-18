@@ -17,19 +17,19 @@ public class KnnItemSimilarity {
 			DoctorEntity doctor2) {
 //		System.out.println(doctor1.getId());
 		List<ZhengRatingEntity> zheng1 = ds.getSortedRatingsByDoctorId()
-				.get(doctor1.getId());// 获取某一个医生所包含的疾病
+				.get(doctor1.getId());// 获取某一个医生所包含的症状
 				
 		List<ZhengRatingEntity> zheng2 = ds.getSortedRatingsByDoctorId()
 				.get(doctor2.getId());
 
-		// 如果这两个疾病集合有一个为空，则说明两个医生不相似，返回0
+		// 如果这两个症状集合有一个为空，则说明两个医生不相似，返回0
 		int count = 0;
 		if (zheng1 == null || zheng2 == null) {
 			System.err.println("医生没有看过病");
 			return 0;
 		}
 
-		// 判断两个疾病集合是否有交集，如果有则count+1
+		// 判断两个症状集合是否有交集，如果有则count+1
 		for (int i = 0; i < zheng1.size(); i++) {
 			for (int j = 0; j < zheng2.size(); j++) {
 				if (zheng1.get(i).getZhengId() == zheng2.get(j).getZhengId()) {
