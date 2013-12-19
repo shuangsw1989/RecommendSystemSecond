@@ -5,6 +5,7 @@ public class ZhengDataSetConfig {
 	public static String AllRatingPath = "data/zhengdata/ratingall.txt";
 	public static String AllDoctorPath = "data/zhengdata/doctorall.txt";
 	public static String AllZhengPath = "data/zhengdata/zhengall.txt";
+	public static String RecommendResultPath="data/zhengdata/recoresult.txt";
 	//控制字符串分割的方式
 	public static String AttrSplit = ";";
 	//读取数据库获得的数据文件

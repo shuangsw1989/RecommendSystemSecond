@@ -7,7 +7,7 @@ import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.entity.ZhengRatingEntity;
 
 
-public class KnnItemSimilarity {
+public class ZhengKnnItemSimilarity {
 	
 	
 	/**

@@ -7,7 +7,7 @@ import net.wss.rs.data.zheng.ZhengDataSetConfig;
 import net.wss.rs.data.zheng.ZhengDealDataSet;
 import net.wss.rs.data.zheng.ZhengDoctorRecommendDataset;
 import net.wss.rs.recommend.ZhengRecommend;
-import net.wss.rs.similarity.zheng.KnnItemSimilarity;
+import net.wss.rs.similarity.zheng.ZhengKnnItemSimilarity;
 
 public class TestKnnItemSimRecommend {
 
@@ -27,7 +27,7 @@ public class TestKnnItemSimRecommend {
 		dds.setAllRatingSort(zhengCalCount);
 		
 //		计算doc-doc相似矩阵
-		KnnItemSimilarity knnsim = new KnnItemSimilarity();
+		ZhengKnnItemSimilarity knnsim = new ZhengKnnItemSimilarity();
 		int[][] doctorSimilarity = knnsim.getAllSimilarityByCommonRating(ds);
 		
 //		根据相似度推荐

@@ -3,11 +3,13 @@ package net.wss.rs.jdbc.zheng;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import net.wss.rs.data.disease.DataSetConfig;
 import net.wss.rs.data.zheng.ZhengDataSetConfig;
 import net.wss.rs.data.zheng.ZhengDealDataSet;
 import net.wss.rs.data.zheng.ZhengDoctorRecommendDataset;
 import net.wss.rs.recommend.ZhengRecommend;
-import net.wss.rs.similarity.zheng.KnnItemSimilarity;
+import net.wss.rs.similarity.zheng.ZhengKnnItemSimilarity;
+import net.wss.rs.util.FileUtil;
 
 public class UpdateDocSim {
 
@@ -28,7 +30,7 @@ public class UpdateDocSim {
 		dds.setAllRatingSort(zhengCalCount);
 		
 //		计算doc-doc相似矩阵
-		KnnItemSimilarity knnsim = new KnnItemSimilarity();
+		ZhengKnnItemSimilarity knnsim = new ZhengKnnItemSimilarity();
 		int[][] doctorSimilarity = knnsim.getAllSimilarityByCommonRating(ds);
 		
 //		根据相似度推荐
@@ -36,8 +38,10 @@ public class UpdateDocSim {
 		HashMap<Integer,String> sortedAllDocSim = recom.recommendSimDoc(doctorSimilarity, recommendDocNum);
 		KbDoctorService kbservice = new KbDoctorService();
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
-			kbservice.updateDocSim(entry.getKey(), entry.getValue());
-			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
+//			kbservice.updateDocSim(entry.getKey(), entry.getValue());//更新数据库
+			String line = entry.getKey()+ZhengDataSetConfig.AttrSplit+entry.getValue();
+			FileUtil.appendData(ZhengDataSetConfig.RecommendResultPath, line);//写文件
+//			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
 	}
 

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import net.wss.rs.data.disease.DataSetConfig;
 import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.recommend.DiseaseKNNSimilarity;
+import net.wss.rs.util.FileUtil;
 
 public class UpdateDocSim {
 
@@ -28,7 +29,9 @@ public class UpdateDocSim {
 		HashMap<Integer,String> sortedAllDocSim = knn.recommendSimDoc(doctorSimilarity, recommendDocNum);
 		KbDoctorService kbservice = new KbDoctorService();
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
-//			kbservice.updateDocSim(entry.getKey(), entry.getValue());
+//			kbservice.updateDocSim(entry.getKey(), entry.getValue());//更新数据库
+			String line = entry.getKey()+DataSetConfig.AttrSplit+entry.getValue();
+			FileUtil.appendData(DataSetConfig.RecommendResultPath, line);//写文件
 //			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
 	}

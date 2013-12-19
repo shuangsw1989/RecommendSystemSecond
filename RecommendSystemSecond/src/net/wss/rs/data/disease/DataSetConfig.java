@@ -6,6 +6,7 @@ public class DataSetConfig {
 	public static String AllRatingPath = "data/diseasedata/ratingall.txt";
 	public static String AllDoctorPath = "data/diseasedata/doctorall.txt";
 	public static String AllDiseasePath = "data/diseasedata/diseaseall.txt";
+	public static String RecommendResultPath="data/diseasedata/recoresult.txt";
 	//控制字符串分割的方式
 	public static String AttrSplit = ";";
 	//读取数据库获得的数据文件
