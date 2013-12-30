@@ -14,7 +14,8 @@ public class UpdateDocSim {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+//		计算关系矩阵的疾病数量
+		int diseaseCalCount = 30;
 //		推荐的相似医生数量
 		int recommendDocNum = 10;
 //		DoctorRecommendDataset ds = new DoctorRecommendDataset();
@@ -22,7 +23,7 @@ public class UpdateDocSim {
 		
 		DiseaseKNNSimilarity knn = new DiseaseKNNSimilarity(ds);
 //		给ds中的sortedRatingsByDoctorId赋值
-		knn.setAllRatingSort(30);
+		knn.setAllRatingSort(diseaseCalCount);
 		
 		int[][] doctorSimilarity = knn.getAllSimilarityByCommonRating();
 		

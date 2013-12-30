@@ -16,8 +16,8 @@ public class TestEucliddistanceItemSimilarity {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		计算关系矩阵的疾病数量
-		int diseaseCalCount = 30;
+//		计算关系矩阵的疾病数量。这个值需要经过多次测试，看哪个值得结果的精确度最高
+		int diseaseCalCount = 13;
 //		推荐的相似医生数量
 		int recommendDocNum = 10;
 //		DoctorRecommendDataset ds = new DoctorRecommendDataset();
@@ -38,8 +38,6 @@ public class TestEucliddistanceItemSimilarity {
 		for (Entry<Integer, String> entry: sortedAllDocSim.entrySet()) {
 			System.out.println("doc id="+entry.getKey()+"  "+entry.getValue());
 		}
-
-
 	}
 
 }

@@ -16,7 +16,7 @@ public class TestKnnItemSimRecommend {
 	 */
 	public static void main(String[] args) {
 //		计算关系矩阵的疾病数量
-		int diseaseCalCount = 30;
+		int diseaseCalCount = 13;
 //		推荐的相似医生数量
 		int recommendDocNum = 10;
 //		DoctorRecommendDataset ds = new DoctorRecommendDataset();
