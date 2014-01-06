@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="RecommendSystemSecond"
+  id="myeclipse.1385711397549"
+  context-root="/RecommendSystemSecond"
+  j2ee-spec="5.0"
+  archive="RecommendSystemSecond.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
