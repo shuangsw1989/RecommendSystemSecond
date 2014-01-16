@@ -1,6 +1,10 @@
 package net.wss.rs.data.zheng;
 
-public class TestZhengDoctorRecommendDataset {
+import junit.framework.TestCase;
+
+
+
+public class TestZhengDoctorRecommendDataset extends TestCase{
 
 	/**
 	 * @param args

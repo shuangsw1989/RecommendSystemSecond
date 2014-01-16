@@ -1,6 +1,10 @@
 package net.wss.rs.data.disease;
 
-public class TestDoctorRecommendDataset {
+import junit.framework.TestCase;
+
+
+
+public class TestDoctorRecommendDataset extends TestCase{
 
 	/**
 	 * @param args

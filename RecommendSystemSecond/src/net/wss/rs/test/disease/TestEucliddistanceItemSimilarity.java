@@ -3,6 +3,8 @@ package net.wss.rs.test.disease;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import junit.framework.TestCase;
+
 import net.wss.rs.data.disease.DataSetConfig;
 import net.wss.rs.data.disease.DealDataSet;
 import net.wss.rs.data.disease.DoctorRecommendDataset;
@@ -10,7 +12,7 @@ import net.wss.rs.recommend.Recommender;
 import net.wss.rs.similarity.disease.EucliddistanceItemSimilarity;
 
 
-public class TestEucliddistanceItemSimilarity {
+public class TestEucliddistanceItemSimilarity{
 
 	/**
 	 * @param args

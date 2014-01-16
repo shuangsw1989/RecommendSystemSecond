@@ -1,12 +1,14 @@
 package net.wss.rs.evaluation;
 
+import junit.framework.TestCase;
 import net.wss.rs.confi.Constant;
 import net.wss.rs.data.disease.DataSetConfig;
 import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
+
 import net.wss.rs.util.Sort;
 
-public class TestDoctorEvaluation {
+public class TestDoctorEvaluation extends TestCase{
 
 	/**
 	 * @param args

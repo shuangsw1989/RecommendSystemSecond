@@ -1,8 +1,10 @@
 package net.wss.rs.jdbc.disease;
 
+import junit.framework.TestCase;
 import net.wss.rs.jdbc.DBConnection;
 
-public class TestDBConnection {
+
+public class TestDBConnection extends TestCase{
 
 	/**
 	 * @param args

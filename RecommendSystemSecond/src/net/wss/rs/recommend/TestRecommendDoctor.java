@@ -1,11 +1,12 @@
 package net.wss.rs.recommend;
 
+import junit.framework.TestCase;
 import net.wss.rs.data.disease.DataSetConfig;
 import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
 import net.wss.rs.util.Sort;
 
-public class TestRecommendDoctor {
+public class TestRecommendDoctor extends TestCase {
 	public static void main(String[] args) {
 		testTwoDoctorSimi();//两个用户的相似，与诊次无关
 //		testTwoDoctorRatingSimi();//两个用户的相似，与诊次有关

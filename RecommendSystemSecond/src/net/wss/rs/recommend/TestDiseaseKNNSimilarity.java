@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import junit.framework.TestCase;
+
 import net.wss.rs.data.disease.DataSetConfig;
 import net.wss.rs.data.disease.DoctorRecommendDataset;
 import net.wss.rs.entity.DoctorEntity;
@@ -11,7 +13,7 @@ import net.wss.rs.entity.DiseaseRatingEntity;
 import net.wss.rs.util.Sort;
 
 
-public class TestDiseaseKNNSimilarity {
+public class TestDiseaseKNNSimilarity extends TestCase{
 	public static void main(String[] args) {
 		
 //		testSort();//对一个医生所治疾病的诊次进行排序
