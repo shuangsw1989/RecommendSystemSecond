@@ -1,7 +1,11 @@
 package net.wss.rs.util;
 
 import java.util.regex.Pattern;
-
+/**
+ * DataSourceConfig中用到的方法
+ * @author Administrator
+ *
+ */
 public class StringUtil {
 	/**
 	 * 判断是不是数值字符串
