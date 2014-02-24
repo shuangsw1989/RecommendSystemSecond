@@ -43,6 +43,8 @@ public class JacobiItemSimilarity {
 //		System.out.println("第一个医生所治疾病的个数："+dis1.size());	
 //		System.out.println("第二个医生所治疾病的个数："+dis2.size());
 		sim = commDiseases*1.0/(dis1.size()+dis2.size()-commDiseases);
+		//适用于数据集只有0和1两种取值（无和有）时
+//		sim = 1-commDiseases*1.0/(dis1.size()+dis2.size()-commDiseases);
 //		System.out.println("雅克比相似度："+String.format("%.5f",sim));	
 		return sim;
 	}

@@ -61,7 +61,7 @@ public class EucliddistanceItemSimilarity {
 //		System.out.println("欧式距离相似度："+sim);
 		if(commDiseases>0){
 //			sim=1.0d - Math.tanh(sim);
-//			sim=1.0/(sim+1);
+//			sim=1.0/(sim+1);//朴素相似度
 			sim=sim;
 		}
 		
