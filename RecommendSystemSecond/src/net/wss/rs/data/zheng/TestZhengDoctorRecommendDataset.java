@@ -12,8 +12,8 @@ public class TestZhengDoctorRecommendDataset extends TestCase{
 	public static void main(String[] args) {
 //		testDoctor();//测试获取的所有医生
 //		testZheng();//测试获取的所有症状
-//		testRating();//测试获取所有的评分
-		testRatingMatrix();//测试所有用户的评分矩阵
+		testRating();//测试获取所有的评分
+		//testRatingMatrix();//测试所有用户的评分矩阵
 	}
 	
 	public static void testDoctor(){
